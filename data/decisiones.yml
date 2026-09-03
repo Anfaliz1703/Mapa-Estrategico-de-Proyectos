@@ -1,0 +1,13 @@
+# Decisiones importantes tomadas durante sesiones de trabajo.
+#
+# Formato sugerido:
+# - fecha: "2026-09-02"
+#   proyecto: "sinapsis-lighthouse"
+#   decision: "Ubicar los juegos estudiantiles dentro de Sinapsis / Lighthouse."
+#   razon: "Corresponden a productos creados por estudiantes en ese espacio de formación."
+
+decisiones:
+  - fecha: "2026-09-02"
+    proyecto: "sinapsis-lighthouse"
+    decision: "Ubicar los juegos estudiantiles dentro de Sinapsis / Lighthouse."
+    razon: "Martín, Samantha, Emanuel y otros estudiantes pertenecen al trabajo de Sinapsis / Lighthouse, no al proyecto de recursos del colegio."
