@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mapa Estratégico de Proyectos</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: rgba(15, 23, 42, 0.82);
+      --line: rgba(148, 163, 184, 0.24);
+      --text: #e5edf7;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent2: #a78bfa;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.20), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(167, 139, 250, 0.18), transparent 34%),
+        var(--bg);
+    }
+
+    header {
+      padding: 36px min(5vw, 56px) 18px;
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 10px 0 8px;
+      font-size: clamp(32px, 5vw, 64px);
+      line-height: 1;
+    }
+
+    .subtitle {
+      max-width: 850px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    main {
+      padding: 26px min(5vw, 56px) 48px;
+      display: grid;
+      gap: 22px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(160px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.24);
+    }
+
+    .card h3 { margin: 0 0 8px; font-size: 16px; }
+    .card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
+
+    .map-panel {
+      background: rgba(255,255,255,0.95);
+      color: #0f172a;
+      border-radius: 28px;
+      padding: 24px;
+      overflow: auto;
+      box-shadow: 0 24px 100px rgba(0,0,0,.30);
+    }
+
+    .mermaid {
+      min-width: 980px;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    code {
+      color: #bae6fd;
+      background: rgba(15,23,42,.85);
+      padding: 2px 7px;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .grid { grid-template-columns: 1fr; }
+      header, main { padding-left: 18px; padding-right: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Sistema visual personal</div>
+    <h1>Mapa Estratégico de Proyectos</h1>
+    <p class="subtitle">Una primera interfaz para ver tus proyectos como nodos conectados: alcance, estado, entregables y relaciones. La idea es que esto luego reciba tus proyectos reales desde ChatGPT y los convierta en mapa vivo.</p>
+  </header>
+
+  <main>
+    <section class="grid" aria-label="Resumen de proyectos">
+      <article class="card"><h3>El Profe Que Aprende</h3><p>Marca educativa, contenido, comunidad y recursos.</p></article>
+      <article class="card"><h3>Guías Interactivas</h3><p>Material offline, Cornell, laboratorios y evidencias.</p></article>
+      <article class="card"><h3>ORIÓN</h3><p>Agentes para generar, organizar y validar materiales.</p></article>
+      <article class="card"><h3>Sinapsis</h3><p>Formación tecnológica para niños y jóvenes.</p></article>
+      <article class="card"><h3>Mapa Estratégico</h3><p>Vista central para ordenar vida, trabajo y proyectos.</p></article>
+    </section>
+
+    <section class="map-panel">
+      <pre class="mermaid">
+flowchart TD
+    A["Andrés Lizcano Corrales<br/>Vida · Docencia · Tecnología · Contenido"]:::center
+
+    A --> EPQA["El Profe Que Aprende<br/><small>Marca educativa</small>"]:::brand
+    A --> GUIAS["Guías Interactivas Offline<br/><small>Producto pedagógico</small>"]:::education
+    A --> ORION["ORIÓN · Agentes Docentes<br/><small>Automatización / IA</small>"]:::ai
+    A --> SINAPSIS["Sinapsis / Tecnoclan<br/><small>Formación tecnológica</small>"]:::business
+    A --> MAPA["Mapa Estratégico de Proyectos<br/><small>Sistema visual personal</small>"]:::system
+
+    EPQA -->|contenido y comunidad| GUIAS
+    EPQA -->|oferta formativa| SINAPSIS
+    GUIAS -->|materiales base| ORION
+    ORION -->|automatiza mapas| MAPA
+    MAPA -->|claridad estratégica| EPQA
+
+    EPQA --- EPQA_A["Alcance:<br/>Guiones · Miniaturas · Recursos · Calendario"]
+    GUIAS --- GUIAS_A["Alcance:<br/>Lectura · Cornell · Laboratorio · Evidencias"]
+    ORION --- ORION_A["Alcance:<br/>Generador · Validador · Organizador · GitHub"]
+    SINAPSIS --- SINAPSIS_A["Alcance:<br/>Niveles · Micro:bit · PC · Proyectos"]
+    MAPA --- MAPA_A["Alcance:<br/>YAML · Mermaid · README · Web"]
+
+    classDef center fill:#111827,stroke:#38bdf8,color:#ffffff,stroke-width:2px;
+    classDef brand fill:#f97316,stroke:#7c2d12,color:#ffffff;
+    classDef education fill:#2563eb,stroke:#1e3a8a,color:#ffffff;
+    classDef ai fill:#7c3aed,stroke:#4c1d95,color:#ffffff;
+    classDef business fill:#16a34a,stroke:#14532d,color:#ffffff;
+    classDef system fill:#0f766e,stroke:#134e4a,color:#ffffff;
+      </pre>
+    </section>
+
+    <p class="note">Para modificar el mapa, edita <code>projects.yml</code>. Luego el script <code>scripts/generate_mermaid.py</code> puede generar una versión Mermaid desde la fuente estructurada.</p>
+  </main>
+
+  <script>
+    mermaid.initialize({ startOnLoad: true, theme: "default", securityLevel: "loose" });
+  </script>
+</body>
+</html>
