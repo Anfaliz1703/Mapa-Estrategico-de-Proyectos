@@ -3,159 +3,127 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#06111f" />
+  <meta name="theme-color" content="#08111f" />
   <title>Mapa Estratégico de Proyectos</title>
-  <link rel="stylesheet" href="assets/styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-  <script defer src="assets/app.js"></script>
+  <link rel="stylesheet" href="assets/styles.css?v=20260902-2340" />
+  <script defer src="assets/app.js?v=20260902-2340"></script>
 </head>
 <body>
   <div class="app-shell">
-    <aside class="sidebar" aria-label="Navegación principal">
-      <a class="brand" href="./" aria-label="Mapa Estratégico de Proyectos">
-        <div class="logo-mark"><i class="ph ph-radar"></i></div>
-        <div>
+    <aside class="sidebar">
+      <a class="brand" href="./" aria-label="Inicio">
+        <span class="brand-mark">◎</span>
+        <span>
           <strong>Mapa Estratégico</strong>
           <small>Radar personal</small>
-        </div>
+        </span>
       </a>
 
-      <nav class="nav">
-        <button class="active" data-filter="todos"><i class="ph ph-house"></i><span>Resumen</span></button>
-        <button data-filter="educacion"><i class="ph ph-chalkboard-teacher"></i><span>Educación</span></button>
-        <button data-filter="ia"><i class="ph ph-robot"></i><span>IA / agentes</span></button>
-        <button data-filter="software"><i class="ph ph-code"></i><span>Software</span></button>
-        <button data-filter="monetizacion"><i class="ph ph-currency-dollar"></i><span>Monetización</span></button>
-        <button data-filter="vida-personal"><i class="ph ph-heart"></i><span>Vida personal</span></button>
-        <button data-filter="consultoria"><i class="ph ph-briefcase"></i><span>Consultoría</span></button>
+      <nav class="side-nav" aria-label="Filtros principales">
+        <button class="nav-item active" data-filter="todos">⌂ <span>Resumen</span></button>
+        <button class="nav-item" data-filter="educacion">▣ <span>Educación</span></button>
+        <button class="nav-item" data-filter="ia">✦ <span>IA / agentes</span></button>
+        <button class="nav-item" data-filter="software">⌘ <span>Software</span></button>
+        <button class="nav-item" data-filter="monetizacion">$ <span>Monetización</span></button>
+        <button class="nav-item" data-filter="vida-personal">♡ <span>Vida personal</span></button>
+        <button class="nav-item" data-filter="consultoria">▤ <span>Consultoría</span></button>
       </nav>
 
-      <section class="sidebar-card">
-        <strong>Propósito del día</strong>
-        <p>Hacer visible lo que importa, cerrar pendientes y reducir el ruido operativo.</p>
-        <div class="mini-progress" style="--progress:64%"><span></span></div>
+      <section class="purpose-card">
+        <small>Propósito del día</small>
+        <strong>Avanzar con claridad, no con ruido.</strong>
+        <p>El radar separa visión, proyectos, pendientes y acciones para que el sistema no dependa de la memoria.</p>
       </section>
     </aside>
 
-    <main class="content">
+    <main class="main">
       <section class="hero">
         <div>
-          <div class="eyebrow">Radar estratégico personal</div>
+          <p class="eyebrow">Radar estratégico personal</p>
           <h1>Mapa Estratégico de Proyectos</h1>
-          <p class="subtitle">Una cabina visual para ver tus proyectos como sistema: relaciones, prioridades, avances, pendientes y próximos movimientos. Vista principal tipo hub radial y segunda vista tipo tarjetas con porcentaje.</p>
+          <p class="hero-copy">Cabina visual para leer tus proyectos como sistema: relaciones, prioridades, avances, pendientes y próximos movimientos.</p>
         </div>
         <div class="hero-actions">
-          <a class="ghost-btn" href="https://github.com/Anfaliz1703/Mapa-Estrategico-de-Proyectos" target="_blank" rel="noopener"><i class="ph ph-github-logo"></i> GitHub</a>
-          <button class="primary-btn" id="copyTemplate"><i class="ph ph-clipboard-text"></i> Copiar cierre</button>
+          <a class="ghost-link" href="https://github.com/Anfaliz1703/Mapa-Estrategico-de-Proyectos" target="_blank" rel="noreferrer">GitHub</a>
+          <button class="primary-action" id="copySummary">Copiar cierre</button>
         </div>
       </section>
 
-      <section class="control-bar" aria-label="Controles de visualización">
-        <div class="view-switch">
-          <button class="active" data-view="hub"><i class="ph ph-graph"></i> Hub central</button>
-          <button data-view="cards"><i class="ph ph-squares-four"></i> Tarjetas con porcentajes</button>
+      <section class="controls" aria-label="Controles del tablero">
+        <div class="view-switch" role="tablist" aria-label="Cambiar vista">
+          <button class="active" data-view="hub" role="tab" aria-selected="true">Hub central</button>
+          <button data-view="cards" role="tab" aria-selected="false">Tarjetas con porcentajes</button>
         </div>
         <label class="search-box">
-          <i class="ph ph-magnifying-glass"></i>
-          <input id="search" type="search" placeholder="Buscar proyecto, dolor, categoría o siguiente acción..." autocomplete="off" />
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Buscar proyecto, dolor, categoría o siguiente acción..." autocomplete="off" />
         </label>
       </section>
 
-      <section class="mobile-filter" aria-label="Filtros rápidos">
-        <button class="chip active" data-filter="todos"><i class="ph ph-grid-nine"></i> Todo</button>
-        <button class="chip" data-filter="educacion"><i class="ph ph-chalkboard-teacher"></i> Educación</button>
-        <button class="chip" data-filter="ia"><i class="ph ph-robot"></i> IA</button>
-        <button class="chip" data-filter="software"><i class="ph ph-code"></i> Software</button>
-        <button class="chip" data-filter="monetizacion"><i class="ph ph-currency-dollar"></i> Monetización</button>
-        <button class="chip" data-filter="vida-personal"><i class="ph ph-heart"></i> Vida</button>
-        <button class="chip" data-filter="alta"><i class="ph ph-flag"></i> Prioridad alta</button>
+      <section class="filter-row" aria-label="Filtros rápidos">
+        <button class="chip active" data-filter="todos">Todo</button>
+        <button class="chip" data-filter="educacion">Educación</button>
+        <button class="chip" data-filter="ia">IA</button>
+        <button class="chip" data-filter="software">Software</button>
+        <button class="chip" data-filter="monetizacion">Monetización</button>
+        <button class="chip" data-filter="vida-personal">Vida</button>
+        <button class="chip" data-filter="alta">Prioridad alta</button>
       </section>
 
-      <section class="stats" aria-label="Indicadores generales">
-        <article class="stat"><span>Proyectos visibles</span><strong id="stat-total">0</strong><small>según filtro actual</small></article>
-        <article class="stat"><span>Progreso promedio</span><strong id="stat-progress">0%</strong><small>estimación inicial</small></article>
-        <article class="stat"><span>Prioridad alta</span><strong id="stat-high">0</strong><small>requieren atención</small></article>
-        <article class="stat"><span>Pendientes abiertos</span><strong id="stat-pending">0</strong><small>por consolidar</small></article>
+      <section class="stats-grid">
+        <article class="stat-card"><small>Proyectos visibles</small><strong id="statTotal">0</strong><span>según filtro actual</span></article>
+        <article class="stat-card"><small>Progreso promedio</small><strong id="statProgress">0%</strong><span>estimación inicial</span></article>
+        <article class="stat-card"><small>Prioridad alta</small><strong id="statHigh">0</strong><span>requieren atención</span></article>
+        <article class="stat-card"><small>Pendientes abiertos</small><strong id="statPending">0</strong><span>por consolidar</span></article>
       </section>
 
-      <section id="hubView" class="view active">
+      <section id="hubView" class="view-panel active" aria-label="Vista hub radial">
         <div class="hub-layout">
-          <section class="panel">
-            <div class="panel-head">
-              <h2>Hub central de proyectos</h2>
-              <small id="resultLabel">0 proyectos visibles</small>
+          <article class="radial-card">
+            <div class="section-title">
+              <div><h2>Hub central de proyectos</h2><p id="hubSubtitle">Sistema completo</p></div>
+              <button class="mini-button" data-view="cards">Ver tarjetas</button>
             </div>
-            <div class="hub-stage">
-              <div class="orbital-grid" aria-hidden="true"></div>
-              <svg id="hubLines" class="hub-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+            <div class="radial-map" id="radialMap">
+              <svg id="lineLayer" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
               <div class="center-node">
-                <div>
-                  <strong>Mi visión</strong>
-                  <span>Educar · Crear · Automatizar · Sostener</span>
-                </div>
+                <span>◎</span>
+                <strong>Mi visión</strong>
+                <small>Educar · Crear · Automatizar · Sostener</small>
               </div>
-              <div id="hubNodes"></div>
-              <div class="hub-footer">
-                <div class="legend">
-                  <span style="--tone:#22c55e">Educación</span>
-                  <span style="--tone:#3b82f6">Recursos</span>
-                  <span style="--tone:#ec4899">Marca</span>
-                  <span style="--tone:#f59e0b">Software</span>
-                  <span style="--tone:#14b8a6">Vida</span>
-                </div>
-                <button class="voice-card" id="voiceBtn">
-                  <span class="voice-orb"><i class="ph ph-microphone"></i></span>
-                  <span><strong>Registrar avance</strong><small>por audio en el cierre nocturno</small></span>
-                </button>
+              <div id="areaNodes"></div>
+            </div>
+          </article>
+
+          <aside class="operations-card">
+            <div class="section-title">
+              <div><h2>Plan operativo</h2><p>Lo que pide atención ahora</p></div>
+              <button class="mini-button" id="focusHigh">Prioridad alta</button>
+            </div>
+            <div id="nextActions" class="action-list"></div>
+            <div class="load-card">
+              <div class="load-meter" id="loadMeter"><span>0</span></div>
+              <div>
+                <strong>Semáforo de carga</strong>
+                <p id="loadText">Calculando enfoque del sistema.</p>
               </div>
             </div>
-            <div class="quick-projects" id="quickProjects"></div>
-          </section>
-
-          <aside class="side-stack">
-            <section class="panel">
-              <div class="panel-head"><h3>Plan operativo</h3><small>Hoy</small></div>
-              <div class="today-list">
-                <div class="todo-row"><time>07:00</time><span>Docencia y evidencias</span><i class="ph ph-check-circle"></i></div>
-                <div class="todo-row"><time>15:30</time><span>Sinapsis / recursos</span><i class="ph ph-circle"></i></div>
-                <div class="todo-row"><time>21:30</time><span>Cierre diario con Jarvis</span><i class="ph ph-microphone"></i></div>
-              </div>
-            </section>
-
-            <section class="panel highlight-card">
-              <h3>Último avance enfocado</h3>
-              <p><strong id="focusName">Proyecto</strong></p>
-              <div class="progress-row">
-                <div class="bar" id="focusBar" style="--progress:0%"><span></span></div>
-                <div class="percent" id="focusProgress">0%</div>
-              </div>
-              <p id="focusNext">Siguiente acción pendiente.</p>
-            </section>
-
-            <section class="panel">
-              <div class="panel-head"><h3>Radar de enfoque</h3><small>Balance</small></div>
-              <div class="chart-wrap"><canvas id="focusChart" aria-label="Radar de enfoque"></canvas></div>
-            </section>
           </aside>
         </div>
       </section>
 
-      <section id="cardsView" class="view">
-        <div class="cards-toolbar">
-          <div>
-            <div class="eyebrow">Vista tipo tarjetas</div>
-            <h2>Proyectos con porcentaje, pendientes y próxima acción</h2>
-          </div>
-          <button class="ghost-btn" data-filter="alta"><i class="ph ph-flag"></i> Ver prioridad alta</button>
+      <section id="cardsView" class="view-panel" aria-label="Vista tarjetas con porcentajes">
+        <div class="section-title">
+          <div><h2>Tarjetas interactivas</h2><p>Porcentaje, pendientes, estado y siguiente acción por proyecto.</p></div>
+          <button class="mini-button" data-filter="alta">Ver prioridad alta</button>
         </div>
-        <div class="cards-grid" id="cardsGrid"></div>
+        <div id="cardsGrid" class="cards-grid"></div>
       </section>
 
-      <p class="subtitle">Los porcentajes son una estimación inicial para visualizar el sistema. El siguiente paso será alimentarlos con bitácoras reales desde el cierre diario y los archivos <code>data/avances.yml</code>, <code>data/pendientes.yml</code>, <code>data/decisiones.yml</code> y <code>data/bloqueos.yml</code>.</p>
-      <footer class="note">Mapa Estratégico de Proyectos · <span id="year"></span> · Interfaz responsive para GitHub Pages.</footer>
+      <p class="footer-note">Los porcentajes son estimaciones iniciales. La siguiente fase será conectarlos con bitácoras reales: avances, pendientes, decisiones y bloqueos.</p>
     </main>
   </div>
+
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
