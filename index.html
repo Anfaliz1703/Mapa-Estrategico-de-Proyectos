@@ -3,112 +3,159 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#06111f" />
   <title>Mapa Estratégico de Proyectos</title>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-  <style>
-    :root{--bg:#06111f;--panel:rgba(15,23,42,.88);--soft:rgba(255,255,255,.08);--line:rgba(148,163,184,.25);--text:#e5edf7;--muted:#94a3b8;--accent:#38bdf8;--high:#60a5fa;--mid:#2dd4bf}
-    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:radial-gradient(circle at top left,rgba(56,189,248,.22),transparent 34%),radial-gradient(circle at bottom right,rgba(167,139,250,.18),transparent 34%),var(--bg)}
-    header{position:sticky;top:0;z-index:5;padding:30px min(5vw,64px) 18px;border-bottom:1px solid var(--line);background:rgba(6,17,31,.9);backdrop-filter:blur(14px)}
-    .eyebrow{color:var(--accent);letter-spacing:.16em;text-transform:uppercase;font-size:12px;font-weight:800}h1{margin:8px 0;font-size:clamp(30px,4.5vw,58px);line-height:1}.subtitle{max-width:980px;color:var(--muted);font-size:17px;line-height:1.5}
-    main{padding:24px min(5vw,64px) 48px;display:grid;gap:20px}.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}button,input{border:1px solid var(--line);border-radius:999px;background:var(--soft);color:var(--text);padding:10px 14px;font:inherit}button{cursor:pointer}button.active,button:hover{background:rgba(56,189,248,.20);border-color:rgba(56,189,248,.65)}input{min-width:min(390px,100%);outline:0}
-    .stats{display:grid;grid-template-columns:repeat(4,minmax(160px,1fr));gap:14px}.stat,.card,.map-panel{background:var(--panel);border:1px solid var(--line);border-radius:24px;box-shadow:0 20px 70px rgba(0,0,0,.24)}.stat{padding:18px}.stat strong{display:block;font-size:30px}.stat span{color:var(--muted);font-size:13px}
-    .layout{display:grid;grid-template-columns:minmax(320px,.9fr) minmax(520px,1.35fr);gap:18px;align-items:start}.cards{display:grid;gap:14px}.card{padding:18px}.card h3{margin:0 0 8px;font-size:18px}.meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.pill{border:1px solid var(--line);border-radius:999px;padding:4px 8px;color:#dbeafe;background:rgba(59,130,246,.12);font-size:11px}.pill.high{background:rgba(59,130,246,.25);border-color:rgba(59,130,246,.55)}.pill.medium{background:rgba(20,184,166,.18);border-color:rgba(20,184,166,.48)}.card p{color:var(--muted);line-height:1.48;margin:8px 0;font-size:13.5px}.card details{margin-top:10px;color:var(--muted);font-size:13px}.card summary{color:#dbeafe;cursor:pointer;margin-bottom:7px}ul{margin:7px 0 0 18px;padding:0}
-    .map-panel{padding:18px;overflow:auto;background:rgba(255,255,255,.96);color:#0f172a}.map-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px;font-weight:800}.mermaid{min-width:1080px}.note{color:var(--muted);line-height:1.5;font-size:14px}code{color:#bae6fd;background:rgba(15,23,42,.85);padding:2px 7px;border-radius:8px}
-    @media(max-width:1100px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}@media(max-width:640px){header,main{padding-left:16px;padding-right:16px}.stats{grid-template-columns:1fr}input{width:100%}}
-  </style>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script defer src="assets/app.js"></script>
 </head>
 <body>
-<header>
-  <div class="eyebrow">Radar estratégico personal</div>
-  <h1>Mapa Estratégico de Proyectos</h1>
-  <p class="subtitle">Vista gráfica y filtrable de tus frentes reales: docencia, recursos educativos, IA, marca personal, Sinapsis, plataforma educativa, formación, vida familiar, tecnología y consultoría.</p>
-</header>
-<main>
-  <section class="toolbar">
-    <button class="active" data-filter="todos">Todo</button>
-    <button data-filter="educacion">Educación</button>
-    <button data-filter="ia">IA / agentes</button>
-    <button data-filter="software">Software</button>
-    <button data-filter="monetizacion">Monetización</button>
-    <button data-filter="vida-personal">Vida personal</button>
-    <button data-filter="consultoria">Consultoría</button>
-    <button data-filter="alta">Prioridad alta</button>
-    <input id="search" type="search" placeholder="Buscar proyecto, dolor o siguiente acción..." />
-  </section>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <a class="brand" href="./" aria-label="Mapa Estratégico de Proyectos">
+        <div class="logo-mark"><i class="ph ph-radar"></i></div>
+        <div>
+          <strong>Mapa Estratégico</strong>
+          <small>Radar personal</small>
+        </div>
+      </a>
 
-  <section class="stats">
-    <div class="stat"><strong id="stat-total">0</strong><span>proyectos visibles</span></div>
-    <div class="stat"><strong id="stat-high">0</strong><span>prioridad alta</span></div>
-    <div class="stat"><strong id="stat-edu">0</strong><span>relacionados con educación</span></div>
-    <div class="stat"><strong id="stat-soft">0</strong><span>software / IA / automatización</span></div>
-  </section>
+      <nav class="nav">
+        <button class="active" data-filter="todos"><i class="ph ph-house"></i><span>Resumen</span></button>
+        <button data-filter="educacion"><i class="ph ph-chalkboard-teacher"></i><span>Educación</span></button>
+        <button data-filter="ia"><i class="ph ph-robot"></i><span>IA / agentes</span></button>
+        <button data-filter="software"><i class="ph ph-code"></i><span>Software</span></button>
+        <button data-filter="monetizacion"><i class="ph ph-currency-dollar"></i><span>Monetización</span></button>
+        <button data-filter="vida-personal"><i class="ph ph-heart"></i><span>Vida personal</span></button>
+        <button data-filter="consultoria"><i class="ph ph-briefcase"></i><span>Consultoría</span></button>
+      </nav>
 
-  <section class="layout">
-    <div class="cards" id="cards"></div>
-    <section class="map-panel">
-      <div class="map-title"><span>Mapa conceptual completo</span><small>Fuente: projects.yml</small></div>
-      <pre class="mermaid">
-flowchart LR
-    A["Andrés Lizcano Corrales<br/>Radar estratégico personal"]:::center
-    A --> EDU["Educación institucional"]:::area
-    A --> REC["Recursos educativos"]:::area
-    A --> MARCA["Marca personal y monetización"]:::area
-    A --> SOFT["Software, IA y automatización"]:::area
-    A --> FOR["Formación y crecimiento"]:::area
-    A --> VIDA["Vida personal y sostenibilidad"]:::area
-    A --> CONS["Consultoría técnica"]:::area
-    EDU --> DOC["Docencia IE El Recreo"]:::alta
-    EDU --> SIN["Sinapsis / Lighthouse"]:::alta
-    REC --> RES["Recursos Educativos con IA y Tecnología"]:::alta
-    MARCA --> EPQA["El Profe Que Aprende"]:::alta
-    SOFT --> ORION["ORIÓN · Agentes Docentes"]:::media
-    SOFT --> PLAT["Plataforma Educativa Integral"]:::media
-    SOFT --> TEC["Tecnología, Automatización y Experimentación"]:::media
-    SOFT --> MAPA["Mapa Estratégico de Proyectos"]:::alta
-    FOR --> FORM["Formación Personal y Profesional"]:::media
-    VIDA --> SOST["Vida, Familia y Sostenibilidad"]:::alta
-    CONS --> HR["Consultoría HR Suite / Nómina"]:::media
-    DOC --> RES
-    RES --> EPQA
-    RES --> SIN
-    ORION --> RES
-    EPQA --> ORION
-    PLAT --> DOC
-    TEC --> MAPA
-    SOST --> DOC
-    SOST --> EPQA
-    HR --> TEC
-    MAPA --> DOC
-    MAPA --> EPQA
-    MAPA --> SIN
-    classDef center fill:#111827,stroke:#38bdf8,color:#ffffff,stroke-width:2px;
-    classDef area fill:#f8fafc,stroke:#94a3b8,color:#0f172a;
-    classDef alta fill:#2563eb,stroke:#1e3a8a,color:#ffffff,stroke-width:2px;
-    classDef media fill:#0f766e,stroke:#134e4a,color:#ffffff;
-      </pre>
-    </section>
-  </section>
+      <section class="sidebar-card">
+        <strong>Propósito del día</strong>
+        <p>Hacer visible lo que importa, cerrar pendientes y reducir el ruido operativo.</p>
+        <div class="mini-progress" style="--progress:64%"><span></span></div>
+      </section>
+    </aside>
 
-  <p class="note">Los juegos estudiantiles de Martín, Samantha, Emanuel y otros están ubicados dentro de <code>Sinapsis / Lighthouse</code>. El siguiente nivel será alimentar avances, pendientes, decisiones y bloqueos desde el cierre nocturno.</p>
-</main>
-<script>
-const projects=[
-{id:'docencia-ie-el-recreo',nombre:'Docencia IE El Recreo',area:'Educación institucional',categorias:['educacion','institucional','evaluacion','planeacion','feria'],estado:'Activo permanente',prioridad:'Alta',objetivo:'Trabajo principal: clases, planeaciones, notas, asistencias, controles diarios, desempeños, ESTEMBRANDO, CafeTech, CafeSec, feria, malla, plan curricular y actas.',siguiente:'Crear tablero por grado, materia, evidencia pendiente y notas mínimas.',sub:['ESTEMBRANDO','CafeTech','CafeSec','Feria de Ciencia y Tecnología','Seguimiento de notas y evidencias'],dol:['Cuesta cerrar notas y evidencias','Notificaciones nocturnas fáciles de ignorar']},
-{id:'recursos-educativos-ia-tecnologia',nombre:'Recursos Educativos con IA y Tecnología',area:'Recursos educativos',categorias:['educacion','ia','recursos','guias','offline'],estado:'Activo',prioridad:'Alta',objetivo:'Guías PDF, HTML offline, Cornell, laboratorios virtuales, plantillas, rúbricas y apps de clase.',siguiente:'Separar plantillas maestras, recursos de prueba y recursos listos para publicar.',sub:['Guías HTML','PDF imprimibles','Laboratorios','Rúbricas','Microherramientas'],dol:['Muchas versiones sueltas','Falta plantilla maestra estable']},
-{id:'orion-agentes-docentes',nombre:'ORIÓN · Agentes Docentes',area:'Software, IA y automatización',categorias:['ia','automatizacion','educacion','github','agentes','software'],estado:'Conceptual / en diseño',prioridad:'Media',objetivo:'Sistema de agentes: ORIÓN recibe intención, MERLIN genera recursos y SÉNECA valida calidad y coherencia.',siguiente:'Definir un MVP: generar una guía desde formulario y dejarla lista para revisión.',sub:['ORIÓN','MERLIN','SÉNECA','Repositorio de plantillas'],dol:['Puede crecer demasiado','Necesita criterios claros']},
-{id:'el-profe-que-aprende',nombre:'El Profe Que Aprende',area:'Marca personal y monetización',categorias:['marca-personal','monetizacion','educacion','contenido','recursos'],estado:'Activo estratégico',prioridad:'Alta',objetivo:'Marca educativa, contenido, comunidad, recursos, blogs, sitio web y monetización.',siguiente:'Crear un pipeline mínimo: idea, guion, asset, publicación y recurso asociado.',sub:['TikTok/Reels/YouTube/Facebook','elprofequeaprende.com','Generador autónomo de recursos','Kits digitales'],dol:['Rentable, pero consume tiempo','Falta sistema realista']},
-{id:'sinapsis-lighthouse',nombre:'Sinapsis / Lighthouse',area:'Educación institucional',categorias:['educacion','formacion-privada','emprendimiento','estudiantes','programacion'],estado:'En operación',prioridad:'Alta',objetivo:'Clases infantiles y juveniles, convenio Lighthouse, Scratch, Micro:bit, construcción y juegos estudiantiles.',siguiente:'Formalizar ruta por niveles y separar infantil, juvenil y Lighthouse dentro del tablero.',sub:['Infantil tipo Lego','Juveniles Scratch/Micro:bit','Convenio Lighthouse','Juegos: Martín, Samantha, Emanuel y otros'],dol:['Investigar línea infantil Lego','Formalizar niveles, precios y evidencias']},
-{id:'plataforma-educativa-integral',nombre:'Plataforma Educativa Integral',area:'Software, IA y automatización',categorias:['software','educacion','gestion-institucional','convivencia','notas'],estado:'Idea avanzada',prioridad:'Media',objetivo:'Plataforma simple para notas, asistencia, observaciones, convivencia, comités y consulta de familias.',siguiente:'Definir MVP: notas + asistencia + observaciones básicas antes de convivencia y comités.',sub:['Módulo académico','Módulo convivencial / ORIENTA','Comités','Familias'],dol:['Proyecto grande','Debe ser simple para docentes aversos']},
-{id:'formacion-personal-profesional',nombre:'Formación Personal y Profesional',area:'Formación y crecimiento',categorias:['crecimiento','academico','profesional','ingles','doctorado'],estado:'Activo',prioridad:'Media',objetivo:'Doctorado, inglés, IA, eventos, convocatorias, portafolio, ingreso, ascenso y certificaciones.',siguiente:'Crear portafolio cronológico de logros, certificados y participaciones.',sub:['Doctorado','Inglés','IA','Ingreso y ascenso'],dol:['Sobrecarga','Trasnocho','Tensión con vida familiar']},
-{id:'vida-familia-sostenibilidad',nombre:'Vida, Familia y Sostenibilidad',area:'Vida personal y sostenibilidad',categorias:['vida-personal','bienestar','familia','sueno','limites'],estado:'Activo permanente',prioridad:'Alta',objetivo:'Sueño, salud, pareja, Matteo, rutinas familiares, entrenamientos, finanzas y límites de carga.',siguiente:'Crear semáforo de sobrecarga que cruce sueño, pendientes y proyectos activos.',sub:['Rutina de sueño','Organización familiar','Tiempo de pareja','Entrenamientos'],dol:['Los proyectos invaden la noche','El cansancio afecta cierres']},
-{id:'tecnologia-automatizacion-experimentacion',nombre:'Tecnología, Automatización y Experimentación',area:'Software, IA y automatización',categorias:['software','ia','herramientas','automatizacion','pwa'],estado:'Activo',prioridad:'Media',objetivo:'GitHub, Vercel, MongoDB, PWA, ChatGPT, agentes, MCP, apps, automatizaciones y hardware personal.',siguiente:'Priorizar la PWA Radar Estratégico como interfaz visual del mapa.',sub:['PWA Radar Estratégico','Automatizaciones GitHub','Prototipos educativos','Herramientas de voz'],dol:['Puede dispersar atención','Curiosidad técnica compite con urgencias']},
-{id:'consultoria-hr-suite',nombre:'Consultoría HR Suite / Nómina',area:'Consultoría técnica',categorias:['consultoria','software','nomina','documentacion'],estado:'Ocasional',prioridad:'Media',objetivo:'Revisión técnica, roadmaps, casos puntuales, validación de archivos, reuniones con Víctor y documentación.',siguiente:'Mantenerlo como frente ocasional con límites estrictos.',sub:['Casos de nómina','Roadmaps','Revisión de integridad'],dol:['Puede consumir tiempo','Respetar 2 horas de reunión y 90 minutos de tarea']},
-{id:'mapa-estrategico-proyectos',nombre:'Mapa Estratégico de Proyectos',area:'Software, IA y automatización',categorias:['sistema-personal','automatizacion','visualizacion','software','ia','alta'],estado:'En construcción',prioridad:'Alta',objetivo:'Radar de mando personal con mapa, filtros, bitácora diaria, avances, pendientes, decisiones, bloqueos y próximas acciones.',siguiente:'Agregar lectura de bitácoras y semáforo de avance.',sub:['GitHub Pages','Mermaid','Dashboard','Bitácora nocturna'],dol:['Depende del registro diario','Aún no lee proyectos de ChatGPT automáticamente']}
-];
-let current='todos'; const cards=document.getElementById('cards'); const search=document.getElementById('search');
-function matches(p){const q=search.value.toLowerCase().trim();const data=[p.nombre,p.area,p.estado,p.prioridad,p.objetivo,p.siguiente,...p.categorias,...p.sub,...p.dol].join(' ').toLowerCase();const byFilter=current==='todos'||p.categorias.includes(current)||(current==='alta'&&p.prioridad==='Alta');return byFilter&&(!q||data.includes(q));}
-function render(){const visible=projects.filter(matches);cards.innerHTML=visible.map(p=>`<article class="card"><div class="meta"><span class="pill">${p.area}</span><span class="pill ${p.prioridad==='Alta'?'high':'medium'}">${p.prioridad}</span><span class="pill">${p.estado}</span></div><h3>${p.nombre}</h3><p>${p.objetivo}</p><p><strong>Siguiente acción:</strong> ${p.siguiente}</p><details><summary>Subproyectos y dolores</summary><strong>Subproyectos</strong><ul>${p.sub.map(x=>`<li>${x}</li>`).join('')}</ul><strong>Dolores</strong><ul>${p.dol.map(x=>`<li>${x}</li>`).join('')}</ul></details></article>`).join('')||'<article class="card"><h3>Sin resultados</h3><p>Ajusta el filtro o la búsqueda.</p></article>';document.getElementById('stat-total').textContent=visible.length;document.getElementById('stat-high').textContent=visible.filter(p=>p.prioridad==='Alta').length;document.getElementById('stat-edu').textContent=visible.filter(p=>p.categorias.includes('educacion')).length;document.getElementById('stat-soft').textContent=visible.filter(p=>p.categorias.includes('software')||p.categorias.includes('ia')).length;}
-document.querySelectorAll('button[data-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');current=b.dataset.filter;render();}));search.addEventListener('input',render);mermaid.initialize({startOnLoad:true,theme:'default',securityLevel:'loose'});render();
-</script>
+    <main class="content">
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Radar estratégico personal</div>
+          <h1>Mapa Estratégico de Proyectos</h1>
+          <p class="subtitle">Una cabina visual para ver tus proyectos como sistema: relaciones, prioridades, avances, pendientes y próximos movimientos. Vista principal tipo hub radial y segunda vista tipo tarjetas con porcentaje.</p>
+        </div>
+        <div class="hero-actions">
+          <a class="ghost-btn" href="https://github.com/Anfaliz1703/Mapa-Estrategico-de-Proyectos" target="_blank" rel="noopener"><i class="ph ph-github-logo"></i> GitHub</a>
+          <button class="primary-btn" id="copyTemplate"><i class="ph ph-clipboard-text"></i> Copiar cierre</button>
+        </div>
+      </section>
+
+      <section class="control-bar" aria-label="Controles de visualización">
+        <div class="view-switch">
+          <button class="active" data-view="hub"><i class="ph ph-graph"></i> Hub central</button>
+          <button data-view="cards"><i class="ph ph-squares-four"></i> Tarjetas con porcentajes</button>
+        </div>
+        <label class="search-box">
+          <i class="ph ph-magnifying-glass"></i>
+          <input id="search" type="search" placeholder="Buscar proyecto, dolor, categoría o siguiente acción..." autocomplete="off" />
+        </label>
+      </section>
+
+      <section class="mobile-filter" aria-label="Filtros rápidos">
+        <button class="chip active" data-filter="todos"><i class="ph ph-grid-nine"></i> Todo</button>
+        <button class="chip" data-filter="educacion"><i class="ph ph-chalkboard-teacher"></i> Educación</button>
+        <button class="chip" data-filter="ia"><i class="ph ph-robot"></i> IA</button>
+        <button class="chip" data-filter="software"><i class="ph ph-code"></i> Software</button>
+        <button class="chip" data-filter="monetizacion"><i class="ph ph-currency-dollar"></i> Monetización</button>
+        <button class="chip" data-filter="vida-personal"><i class="ph ph-heart"></i> Vida</button>
+        <button class="chip" data-filter="alta"><i class="ph ph-flag"></i> Prioridad alta</button>
+      </section>
+
+      <section class="stats" aria-label="Indicadores generales">
+        <article class="stat"><span>Proyectos visibles</span><strong id="stat-total">0</strong><small>según filtro actual</small></article>
+        <article class="stat"><span>Progreso promedio</span><strong id="stat-progress">0%</strong><small>estimación inicial</small></article>
+        <article class="stat"><span>Prioridad alta</span><strong id="stat-high">0</strong><small>requieren atención</small></article>
+        <article class="stat"><span>Pendientes abiertos</span><strong id="stat-pending">0</strong><small>por consolidar</small></article>
+      </section>
+
+      <section id="hubView" class="view active">
+        <div class="hub-layout">
+          <section class="panel">
+            <div class="panel-head">
+              <h2>Hub central de proyectos</h2>
+              <small id="resultLabel">0 proyectos visibles</small>
+            </div>
+            <div class="hub-stage">
+              <div class="orbital-grid" aria-hidden="true"></div>
+              <svg id="hubLines" class="hub-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+              <div class="center-node">
+                <div>
+                  <strong>Mi visión</strong>
+                  <span>Educar · Crear · Automatizar · Sostener</span>
+                </div>
+              </div>
+              <div id="hubNodes"></div>
+              <div class="hub-footer">
+                <div class="legend">
+                  <span style="--tone:#22c55e">Educación</span>
+                  <span style="--tone:#3b82f6">Recursos</span>
+                  <span style="--tone:#ec4899">Marca</span>
+                  <span style="--tone:#f59e0b">Software</span>
+                  <span style="--tone:#14b8a6">Vida</span>
+                </div>
+                <button class="voice-card" id="voiceBtn">
+                  <span class="voice-orb"><i class="ph ph-microphone"></i></span>
+                  <span><strong>Registrar avance</strong><small>por audio en el cierre nocturno</small></span>
+                </button>
+              </div>
+            </div>
+            <div class="quick-projects" id="quickProjects"></div>
+          </section>
+
+          <aside class="side-stack">
+            <section class="panel">
+              <div class="panel-head"><h3>Plan operativo</h3><small>Hoy</small></div>
+              <div class="today-list">
+                <div class="todo-row"><time>07:00</time><span>Docencia y evidencias</span><i class="ph ph-check-circle"></i></div>
+                <div class="todo-row"><time>15:30</time><span>Sinapsis / recursos</span><i class="ph ph-circle"></i></div>
+                <div class="todo-row"><time>21:30</time><span>Cierre diario con Jarvis</span><i class="ph ph-microphone"></i></div>
+              </div>
+            </section>
+
+            <section class="panel highlight-card">
+              <h3>Último avance enfocado</h3>
+              <p><strong id="focusName">Proyecto</strong></p>
+              <div class="progress-row">
+                <div class="bar" id="focusBar" style="--progress:0%"><span></span></div>
+                <div class="percent" id="focusProgress">0%</div>
+              </div>
+              <p id="focusNext">Siguiente acción pendiente.</p>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head"><h3>Radar de enfoque</h3><small>Balance</small></div>
+              <div class="chart-wrap"><canvas id="focusChart" aria-label="Radar de enfoque"></canvas></div>
+            </section>
+          </aside>
+        </div>
+      </section>
+
+      <section id="cardsView" class="view">
+        <div class="cards-toolbar">
+          <div>
+            <div class="eyebrow">Vista tipo tarjetas</div>
+            <h2>Proyectos con porcentaje, pendientes y próxima acción</h2>
+          </div>
+          <button class="ghost-btn" data-filter="alta"><i class="ph ph-flag"></i> Ver prioridad alta</button>
+        </div>
+        <div class="cards-grid" id="cardsGrid"></div>
+      </section>
+
+      <p class="subtitle">Los porcentajes son una estimación inicial para visualizar el sistema. El siguiente paso será alimentarlos con bitácoras reales desde el cierre diario y los archivos <code>data/avances.yml</code>, <code>data/pendientes.yml</code>, <code>data/decisiones.yml</code> y <code>data/bloqueos.yml</code>.</p>
+      <footer class="note">Mapa Estratégico de Proyectos · <span id="year"></span> · Interfaz responsive para GitHub Pages.</footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
