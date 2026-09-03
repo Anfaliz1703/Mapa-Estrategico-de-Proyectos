@@ -2,80 +2,56 @@
 
 Radar visual para organizar los proyectos de **Andrés Lizcano Corrales**: docencia, recursos educativos, IA, marca personal, Sinapsis, formación, vida familiar, consultoría y automatización.
 
-> Versión real inicial. Se retiró el nodo ficticio de prueba y se cargó la estructura refinada a partir de la conversación del 2 de septiembre de 2026.
+> Versión de interfaz: Hub radial + Tarjetas interactivas con porcentajes.
 
 ## Vista web con GitHub Pages
 
-La vista principal está preparada en:
+La vista principal está preparada para funcionar desde cualquiera de estas rutas:
 
 ```text
+/index.html
 /docs/index.html
 ```
 
-Cuando GitHub Pages esté activo, la URL esperada será:
+URL esperada del radar:
 
 ```text
 https://anfaliz1703.github.io/Mapa-Estrategico-de-Proyectos/
 ```
 
-Para activarlo:
+## Interfaz actual
 
-1. Entrar al repositorio en GitHub.
-2. Ir a **Settings**.
-3. Abrir **Pages**.
-4. En **Build and deployment**, seleccionar **Deploy from a branch**.
-5. En **Branch**, escoger:
-   - Branch: `main`
-   - Folder: `/docs`
-6. Guardar.
+La app visual ahora tiene dos modos principales:
 
-Si GitHub no permite publicar desde un repositorio privado con tu plan actual, hay dos salidas limpias: hacer público este repositorio o desplegar la carpeta `docs/` en Vercel. Como este mapa puede contener información personal, conviene pensarlo antes de hacerlo público.
+1. **Hub central**  
+   Vista inspirada en la opción 4: centro radial con áreas estratégicas, relaciones visuales, plan operativo, último avance enfocado, radar de balance y acceso al cierre diario.
 
-## Vista conceptual
+2. **Tarjetas con porcentajes**  
+   Vista inspirada en la opción 9: tarjetas por proyecto con porcentaje de avance, prioridad, estado, categorías, dolores, subproyectos y siguiente acción.
 
-```mermaid
-flowchart LR
-    A["Andrés Lizcano Corrales<br/>Radar estratégico personal"]:::center
+También incluye:
 
-    A --> EDU["Educación institucional"]:::area
-    A --> REC["Recursos educativos"]:::area
-    A --> MARCA["Marca personal y monetización"]:::area
-    A --> SOFT["Software, IA y automatización"]:::area
-    A --> FOR["Formación y crecimiento"]:::area
-    A --> VIDA["Vida personal y sostenibilidad"]:::area
-    A --> CONS["Consultoría técnica"]:::area
+- Filtros por educación, IA, software, monetización, vida personal, consultoría y prioridad alta.
+- Buscador por proyecto, dolor, categoría o siguiente acción.
+- Diseño responsive para escritorio, tablet y celular.
+- Librerías externas por CDN: Phosphor Icons y Chart.js.
+- Botón para copiar plantilla de cierre diario.
 
-    EDU --> DOC["Docencia IE El Recreo"]:::alta
-    EDU --> SIN["Sinapsis / Lighthouse"]:::alta
-    REC --> RES["Recursos Educativos con IA y Tecnología"]:::alta
-    MARCA --> EPQA["El Profe Que Aprende"]:::alta
-    SOFT --> ORION["ORIÓN · Agentes Docentes"]:::media
-    SOFT --> PLAT["Plataforma Educativa Integral"]:::media
-    SOFT --> TEC["Tecnología, Automatización y Experimentación"]:::media
-    SOFT --> MAPA["Mapa Estratégico de Proyectos"]:::alta
-    FOR --> FORM["Formación Personal y Profesional"]:::media
-    VIDA --> SOST["Vida, Familia y Sostenibilidad"]:::alta
-    CONS --> HR["Consultoría HR Suite / Nómina"]:::media
+## Activación recomendada de GitHub Pages
 
-    DOC --> RES
-    RES --> EPQA
-    RES --> SIN
-    ORION --> RES
-    EPQA --> ORION
-    PLAT --> DOC
-    TEC --> MAPA
-    SOST --> DOC
-    SOST --> EPQA
-    HR --> TEC
-    MAPA --> DOC
-    MAPA --> EPQA
-    MAPA --> SIN
+Para evitar que se muestre solo el README, usar esta configuración:
 
-    classDef center fill:#111827,stroke:#38bdf8,color:#ffffff,stroke-width:2px;
-    classDef area fill:#f8fafc,stroke:#94a3b8,color:#0f172a;
-    classDef alta fill:#2563eb,stroke:#1e3a8a,color:#ffffff,stroke-width:2px;
-    classDef media fill:#0f766e,stroke:#134e4a,color:#ffffff;
+```text
+Settings
+→ Pages
+→ Build and deployment
+→ Deploy from a branch
+→ Branch: main
+→ Folder: /root
+→ Save
 ```
+
+También existe una versión equivalente en `/docs`, por si se prefiere publicar desde esa carpeta.
 
 ## Proyectos cargados
 
@@ -102,11 +78,18 @@ Los juegos estudiantiles de **Martín, Samantha, Emanuel y otros estudiantes** p
 ```text
 .
 ├── README.md
+├── index.html
+├── assets/
+│   ├── styles.css
+│   └── app.js
 ├── projects.yml
 ├── docs/
 │   ├── .nojekyll
 │   ├── index.html
-│   └── mapa.mmd
+│   ├── mapa.mmd
+│   └── assets/
+│       ├── styles.css
+│       └── app.js
 ├── scripts/
 │   └── generate_mermaid.py
 └── data/
@@ -118,31 +101,12 @@ Los juegos estudiantiles de **Martín, Samantha, Emanuel y otros estudiantes** p
 
 ## Cómo se usa
 
-1. Editar `projects.yml`.
-2. Ajustar proyectos, categorías, relaciones, prioridades o próximas acciones.
-3. Ejecutar `python scripts/generate_mermaid.py` o dejar que GitHub Actions regenere `docs/mapa.mmd`.
-4. Abrir `docs/index.html` o la URL de GitHub Pages para usar la vista filtrable.
-
-## Campos principales
-
-```yaml
-id:
-nombre:
-area_principal:
-categoria:
-tipo:
-estado:
-prioridad:
-objetivo:
-alcance:
-subproyectos:
-acciones_recurrentes:
-entregables:
-dolores:
-siguiente_accion:
-relaciones:
-```
+1. Abrir la URL de GitHub Pages.
+2. Usar el **Hub central** para ver las áreas estratégicas.
+3. Usar **Tarjetas con porcentajes** para revisar avance, pendientes y siguiente acción.
+4. Filtrar por área o prioridad.
+5. Usar el cierre diario programado para alimentar avances, pendientes, decisiones y bloqueos.
 
 ## Siguiente evolución
 
-La siguiente fase es alimentar `data/avances.yml`, `data/pendientes.yml`, `data/decisiones.yml` y `data/bloqueos.yml` desde el cierre diario programado de ChatGPT.
+La siguiente fase es conectar visualmente los archivos `data/avances.yml`, `data/pendientes.yml`, `data/decisiones.yml` y `data/bloqueos.yml` para que los porcentajes no sean estimados sino calculados desde el registro real de trabajo.
