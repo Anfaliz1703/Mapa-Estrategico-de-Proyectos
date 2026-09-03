@@ -1,0 +1,98 @@
+# Mapa Estratégico de Proyectos
+# Este archivo es la fuente de verdad.
+# Cambia, agrega o elimina proyectos aquí y luego ejecuta el generador.
+
+persona:
+  nombre: "Andrés Lizcano Corrales"
+  vision: "Organizar visualmente proyectos de vida, docencia, tecnología y creación de contenido."
+
+proyectos:
+  - id: epqa
+    nombre: "El Profe Que Aprende"
+    tipo: "Marca educativa"
+    estado: "En crecimiento"
+    objetivo: "Crear contenido educativo, recursos digitales y comunidad alrededor de IA, tecnología y pedagogía."
+    alcance:
+      - "Guiones para videos"
+      - "Miniaturas y piezas visuales"
+      - "Recursos educativos descargables"
+      - "Calendario de publicación"
+    entregables:
+      - "Videos cortos"
+      - "Posts"
+      - "Kits digitales"
+      - "Sitio o repositorio de recursos"
+    relaciones:
+      - "guias-interactivas"
+      - "sinapsis"
+
+  - id: guias-interactivas
+    nombre: "Guías Interactivas Offline"
+    tipo: "Producto pedagógico"
+    estado: "Funcional / iterando"
+    objetivo: "Diseñar guías HTML imprimibles e interactivas para clases con baja conectividad."
+    alcance:
+      - "Lectura guiada"
+      - "Método Cornell"
+      - "Laboratorio virtual"
+      - "Evidencias para cuaderno"
+    entregables:
+      - "HTML offline"
+      - "PDF imprimible"
+      - "Rúbricas"
+    relaciones:
+      - "orion-agentes"
+      - "epqa"
+
+  - id: orion-agentes
+    nombre: "ORIÓN · Agentes Docentes"
+    tipo: "Automatización / IA"
+    estado: "Prototipo conceptual"
+    objetivo: "Usar agentes para generar, revisar y validar materiales educativos."
+    alcance:
+      - "Agente generador"
+      - "Agente validador"
+      - "Agente organizador"
+      - "Control de versiones en GitHub"
+    entregables:
+      - "Prompts base"
+      - "Flujo de revisión"
+      - "Repositorio de materiales"
+    relaciones:
+      - "guias-interactivas"
+      - "mapa-estrategico"
+
+  - id: sinapsis
+    nombre: "Sinapsis / Tecnoclan"
+    tipo: "Formación tecnológica"
+    estado: "En operación"
+    objetivo: "Ofrecer formación tecnológica para niños y jóvenes con enfoque práctico y creativo."
+    alcance:
+      - "Clases por niveles"
+      - "Micro:bit"
+      - "Pensamiento computacional"
+      - "Proyectos demostrables"
+    entregables:
+      - "Planes de clase"
+      - "Evidencias en video"
+      - "Ruta de formación"
+    relaciones:
+      - "epqa"
+
+  - id: mapa-estrategico
+    nombre: "Mapa Estratégico de Proyectos"
+    tipo: "Sistema visual personal"
+    estado: "MVP de prueba"
+    objetivo: "Transformar proyectos, alcances y avances en mapas visuales consultables."
+    alcance:
+      - "Archivo fuente YAML"
+      - "Diagrama Mermaid"
+      - "README visual"
+      - "Página HTML interactiva"
+    entregables:
+      - "Mapa conceptual"
+      - "Vista web"
+      - "Base para automatización futura"
+    relaciones:
+      - "orion-agentes"
+      - "epqa"
