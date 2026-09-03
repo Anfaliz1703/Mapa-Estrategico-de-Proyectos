@@ -1,0 +1,9 @@
+# Bloqueos, riesgos y fricciones.
+#
+# Formato sugerido:
+# - proyecto: "docencia-ie-el-recreo"
+#   bloqueo: "Se crean clases y recursos, pero cuesta cerrar notas y evidencias."
+#   impacto: "alto"
+#   accion_sugerida: "Tablero semanal de notas mínimas y evidencias pendientes."
+
+bloqueos: []
