@@ -1,129 +1,74 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#08111f" />
-  <title>Mapa Estratégico de Proyectos</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20260902-2340" />
-  <script defer src="assets/app.js?v=20260902-2340"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f8fc"><title>Mapa Estratégico de Proyectos</title>
+<style>
+:root{--bg:#f6f8fc;--ink:#0f172a;--muted:#64748b;--line:#dbe4ef;--a:#0ea5a3;--b:#2563eb;--shadow:0 18px 55px rgba(15,23,42,.10)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:radial-gradient(circle at top left,rgba(14,165,163,.16),transparent 34%),radial-gradient(circle at bottom right,rgba(37,99,235,.12),transparent 34%),var(--bg)}button,input,a{font:inherit}button{cursor:pointer}
+.app{display:grid;grid-template-columns:270px 1fr;min-height:100vh}.side{position:sticky;top:0;height:100vh;padding:24px 18px;background:linear-gradient(#fff,#f7fbff);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:20px}.brand{display:flex;gap:12px;align-items:center;color:var(--ink);text-decoration:none}.mark{width:52px;height:52px;border-radius:18px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--a),var(--b));font-size:28px}.brand b{display:block;font-size:20px}.brand small{color:var(--muted)}
+.nav{display:grid;gap:10px}.nav button,.chip,.tab,.mini,.gh,.copy{border:1px solid var(--line);background:#fff;color:#334155;border-radius:16px;padding:12px 15px;font-weight:800;text-decoration:none}.nav button{text-align:left}.nav button.on,.chip.on,.tab.on,.nav button:hover,.chip:hover{background:rgba(14,165,163,.12);border-color:rgba(14,165,163,.45);color:#0f766e}.purpose{margin-top:auto;background:#eefbf9;border:1px solid var(--line);border-radius:22px;padding:18px}.purpose small{color:#0f766e;font-weight:900;text-transform:uppercase}.purpose p{color:var(--muted);line-height:1.45}
+.main{padding:30px clamp(16px,4vw,52px) 48px;display:grid;gap:20px}.hero{display:flex;justify-content:space-between;gap:20px;padding:32px;border:1px solid var(--line);border-radius:32px;background:linear-gradient(135deg,#fff,#eef9ff 55%,#f6f2ff);box-shadow:var(--shadow)}.eyebrow{color:var(--a);font-weight:900;letter-spacing:.14em;text-transform:uppercase;margin:0 0 8px}h1{font-size:clamp(36px,5vw,76px);line-height:.98;margin:0}.hero p:last-child{max-width:900px;color:var(--muted);font-size:19px;line-height:1.5}.acts{display:flex;gap:10px}.copy{border:0;color:#fff;background:linear-gradient(135deg,var(--a),var(--b))}
+.controls{display:grid;grid-template-columns:auto 1fr;gap:14px}.tabs{display:flex;gap:6px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:5px}.tab{border:0}.search{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:20px;background:#fff;padding:0 15px}.search input{border:0;outline:0;background:transparent;width:100%;min-height:54px}.chips{display:flex;flex-wrap:wrap;gap:10px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(145px,1fr));gap:14px}.stat,.panel,.card{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:0 12px 38px rgba(15,23,42,.07)}.stat{padding:20px}.stat small{color:var(--muted);font-weight:800}.stat b{display:block;font-size:38px;margin:8px 0}.stat span{color:#0f766e;font-weight:700}.view{display:none}.view.on{display:block}
+.hub{display:grid;grid-template-columns:minmax(520px,1.4fr) minmax(300px,.75fr);gap:18px}.panel{padding:20px}.head{display:flex;justify-content:space-between;gap:12px;margin-bottom:14px}.head h2{margin:0}.head p{margin:4px 0 0;color:var(--muted)}
+.map{position:relative;min-height:610px;border:1px solid var(--line);border-radius:28px;background:radial-gradient(circle at 50% 50%,rgba(14,165,163,.15),transparent 18%),linear-gradient(135deg,#f8fbff,#fff);overflow:hidden}svg{position:absolute;inset:0;width:100%;height:100%;z-index:1}line{stroke-width:.45;opacity:.8}.center,.area{position:absolute;z-index:2;transform:translate(-50%,-50%);background:#fff;border:1px solid var(--line);box-shadow:0 16px 40px rgba(15,23,42,.13)}.center{left:50%;top:50%;width:220px;min-height:158px;border-radius:32px;display:grid;place-items:center;text-align:center;padding:20px;background:linear-gradient(135deg,#0f172a,#0e7490);color:#fff}.center strong{font-size:23px}.center small{color:#cbd5e1}.area{width:210px;border-radius:22px;padding:15px}.area:hover{transform:translate(-50%,-50%) scale(1.03)}.ah{display:flex;align-items:center;gap:10px}.ai{width:40px;height:40px;border-radius:14px;color:#fff;display:grid;place-items:center}.area small{color:var(--muted)}.bar{height:8px;background:#e5eaf1;border-radius:999px;margin-top:10px;overflow:hidden}.bar i{display:block;height:100%}.miniTags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.miniTags em{font-style:normal;background:#f1f5f9;color:#475569;border-radius:999px;padding:4px 7px;font-size:11px}
+.actions{display:grid;gap:10px}.act{padding:13px;border:1px solid var(--line);border-left-width:5px;border-radius:17px;background:#f9fbff}.act p{color:var(--muted);margin:6px 0 0;line-height:1.35}.load{margin-top:14px;display:flex;gap:14px;align-items:center;padding:15px;border:1px solid var(--line);border-radius:20px;background:#eefbf9}.meter{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;font-weight:950}.meter span{background:#fff;width:60px;height:60px;border-radius:50%;display:grid;place-items:center}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(240px,1fr));gap:16px}.card{padding:20px;display:grid;gap:13px;transition:.2s;position:relative;overflow:hidden}.card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.card:before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--c)}.top{display:flex;justify-content:space-between;gap:12px}.ico{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;background:var(--c);color:#fff;font-size:23px}.card h3{margin:0}.muted,.card p{color:var(--muted);line-height:1.45}.badge{padding:6px 9px;border-radius:999px;font-size:12px;font-weight:900;background:#fef3c7;color:#92400e}.badge.high{background:#fee2e2;color:#b91c1c}.row{display:flex;justify-content:space-between;font-weight:850;color:#475569;font-size:13px}.progress{height:10px;border-radius:999px;background:#e8eef6;overflow:hidden}.progress i{display:block;height:100%;background:var(--c)}.next{background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:12px}.next small{color:#0f766e;font-weight:900}.tags{display:flex;flex-wrap:wrap;gap:6px}.tag{font-size:11px;padding:5px 8px;border-radius:999px;background:#f1f5f9;color:#475569}.empty{grid-column:1/-1;background:#fff;border:1px dashed var(--line);border-radius:22px;padding:26px;text-align:center;color:var(--muted)}.note{color:var(--muted)}.toast{position:fixed;right:20px;bottom:20px;background:#0f172a;color:#fff;border-radius:16px;padding:14px 16px;box-shadow:var(--shadow);opacity:0;transform:translateY(14px);transition:.22s}.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:1180px){.app{grid-template-columns:1fr}.side{position:relative;height:auto}.nav{grid-template-columns:repeat(4,1fr)}.purpose{display:none}.hub{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:760px){.main{padding:16px}.hero{display:grid;padding:24px}.controls{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.nav{grid-template-columns:1fr 1fr}.map{min-height:760px}.area{width:180px}.grid{grid-template-columns:1fr}}@media(max-width:480px){.stats,.nav{grid-template-columns:1fr}h1{font-size:38px}.hero p:last-child{font-size:16px}.map{min-height:900px}.center{top:13%;left:50%}.area{left:50%!important;width:calc(100% - 28px);transform:translateX(-50%)!important}}
+</style>
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <a class="brand" href="./" aria-label="Inicio">
-        <span class="brand-mark">◎</span>
-        <span>
-          <strong>Mapa Estratégico</strong>
-          <small>Radar personal</small>
-        </span>
-      </a>
-
-      <nav class="side-nav" aria-label="Filtros principales">
-        <button class="nav-item active" data-filter="todos">⌂ <span>Resumen</span></button>
-        <button class="nav-item" data-filter="educacion">▣ <span>Educación</span></button>
-        <button class="nav-item" data-filter="ia">✦ <span>IA / agentes</span></button>
-        <button class="nav-item" data-filter="software">⌘ <span>Software</span></button>
-        <button class="nav-item" data-filter="monetizacion">$ <span>Monetización</span></button>
-        <button class="nav-item" data-filter="vida-personal">♡ <span>Vida personal</span></button>
-        <button class="nav-item" data-filter="consultoria">▤ <span>Consultoría</span></button>
-      </nav>
-
-      <section class="purpose-card">
-        <small>Propósito del día</small>
-        <strong>Avanzar con claridad, no con ruido.</strong>
-        <p>El radar separa visión, proyectos, pendientes y acciones para que el sistema no dependa de la memoria.</p>
-      </section>
-    </aside>
-
-    <main class="main">
-      <section class="hero">
-        <div>
-          <p class="eyebrow">Radar estratégico personal</p>
-          <h1>Mapa Estratégico de Proyectos</h1>
-          <p class="hero-copy">Cabina visual para leer tus proyectos como sistema: relaciones, prioridades, avances, pendientes y próximos movimientos.</p>
-        </div>
-        <div class="hero-actions">
-          <a class="ghost-link" href="https://github.com/Anfaliz1703/Mapa-Estrategico-de-Proyectos" target="_blank" rel="noreferrer">GitHub</a>
-          <button class="primary-action" id="copySummary">Copiar cierre</button>
-        </div>
-      </section>
-
-      <section class="controls" aria-label="Controles del tablero">
-        <div class="view-switch" role="tablist" aria-label="Cambiar vista">
-          <button class="active" data-view="hub" role="tab" aria-selected="true">Hub central</button>
-          <button data-view="cards" role="tab" aria-selected="false">Tarjetas con porcentajes</button>
-        </div>
-        <label class="search-box">
-          <span>⌕</span>
-          <input id="searchInput" type="search" placeholder="Buscar proyecto, dolor, categoría o siguiente acción..." autocomplete="off" />
-        </label>
-      </section>
-
-      <section class="filter-row" aria-label="Filtros rápidos">
-        <button class="chip active" data-filter="todos">Todo</button>
-        <button class="chip" data-filter="educacion">Educación</button>
-        <button class="chip" data-filter="ia">IA</button>
-        <button class="chip" data-filter="software">Software</button>
-        <button class="chip" data-filter="monetizacion">Monetización</button>
-        <button class="chip" data-filter="vida-personal">Vida</button>
-        <button class="chip" data-filter="alta">Prioridad alta</button>
-      </section>
-
-      <section class="stats-grid">
-        <article class="stat-card"><small>Proyectos visibles</small><strong id="statTotal">0</strong><span>según filtro actual</span></article>
-        <article class="stat-card"><small>Progreso promedio</small><strong id="statProgress">0%</strong><span>estimación inicial</span></article>
-        <article class="stat-card"><small>Prioridad alta</small><strong id="statHigh">0</strong><span>requieren atención</span></article>
-        <article class="stat-card"><small>Pendientes abiertos</small><strong id="statPending">0</strong><span>por consolidar</span></article>
-      </section>
-
-      <section id="hubView" class="view-panel active" aria-label="Vista hub radial">
-        <div class="hub-layout">
-          <article class="radial-card">
-            <div class="section-title">
-              <div><h2>Hub central de proyectos</h2><p id="hubSubtitle">Sistema completo</p></div>
-              <button class="mini-button" data-view="cards">Ver tarjetas</button>
-            </div>
-            <div class="radial-map" id="radialMap">
-              <svg id="lineLayer" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
-              <div class="center-node">
-                <span>◎</span>
-                <strong>Mi visión</strong>
-                <small>Educar · Crear · Automatizar · Sostener</small>
-              </div>
-              <div id="areaNodes"></div>
-            </div>
-          </article>
-
-          <aside class="operations-card">
-            <div class="section-title">
-              <div><h2>Plan operativo</h2><p>Lo que pide atención ahora</p></div>
-              <button class="mini-button" id="focusHigh">Prioridad alta</button>
-            </div>
-            <div id="nextActions" class="action-list"></div>
-            <div class="load-card">
-              <div class="load-meter" id="loadMeter"><span>0</span></div>
-              <div>
-                <strong>Semáforo de carga</strong>
-                <p id="loadText">Calculando enfoque del sistema.</p>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <section id="cardsView" class="view-panel" aria-label="Vista tarjetas con porcentajes">
-        <div class="section-title">
-          <div><h2>Tarjetas interactivas</h2><p>Porcentaje, pendientes, estado y siguiente acción por proyecto.</p></div>
-          <button class="mini-button" data-filter="alta">Ver prioridad alta</button>
-        </div>
-        <div id="cardsGrid" class="cards-grid"></div>
-      </section>
-
-      <p class="footer-note">Los porcentajes son estimaciones iniciales. La siguiente fase será conectarlos con bitácoras reales: avances, pendientes, decisiones y bloqueos.</p>
-    </main>
-  </div>
-
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div class="app">
+<aside class="side">
+  <a class="brand" href="./"><span class="mark">◎</span><span><b>Mapa Estratégico</b><small>Radar personal</small></span></a>
+  <nav class="nav">
+    <button class="on" data-filter="todos">⌂ Resumen</button><button data-filter="educacion">▣ Educación</button><button data-filter="ia">✦ IA / agentes</button><button data-filter="software">⌘ Software</button><button data-filter="monetizacion">$ Monetización</button><button data-filter="vida-personal">♡ Vida personal</button><button data-filter="consultoria">▤ Consultoría</button>
+  </nav>
+  <section class="purpose"><small>Propósito del día</small><p><b>Avanzar con claridad, no con ruido.</b></p><p>El radar separa visión, proyectos, pendientes y acciones.</p></section>
+</aside>
+<main class="main">
+  <section class="hero"><div><p class="eyebrow">Radar estratégico personal</p><h1>Mapa Estratégico de Proyectos</h1><p>Cabina visual para leer tus proyectos como sistema: relaciones, prioridades, avances, pendientes y próximos movimientos.</p></div><div class="acts"><a class="gh" href="https://github.com/Anfaliz1703/Mapa-Estrategico-de-Proyectos" target="_blank">GitHub</a><button class="copy" id="copy">Copiar cierre</button></div></section>
+  <section class="controls"><div class="tabs"><button class="tab on" data-view="hub">Hub central</button><button class="tab" data-view="cards">Tarjetas con porcentajes</button></div><label class="search">⌕<input id="q" placeholder="Buscar proyecto, dolor, categoría o siguiente acción..."></label></section>
+  <section class="chips"><button class="chip on" data-filter="todos">Todo</button><button class="chip" data-filter="educacion">Educación</button><button class="chip" data-filter="ia">IA</button><button class="chip" data-filter="software">Software</button><button class="chip" data-filter="monetizacion">Monetización</button><button class="chip" data-filter="vida-personal">Vida</button><button class="chip" data-filter="alta">Prioridad alta</button></section>
+  <section class="stats"><article class="stat"><small>Proyectos visibles</small><b id="stTotal">0</b><span>según filtro actual</span></article><article class="stat"><small>Progreso promedio</small><b id="stAvg">0%</b><span>estimación inicial</span></article><article class="stat"><small>Prioridad alta</small><b id="stHigh">0</b><span>requieren atención</span></article><article class="stat"><small>Pendientes abiertos</small><b id="stPend">0</b><span>por consolidar</span></article></section>
+  <section id="hub" class="view on"><div class="hub"><article class="panel"><div class="head"><div><h2>Hub central de proyectos</h2><p id="sub">Sistema completo</p></div><button class="mini" data-view="cards">Ver tarjetas</button></div><div class="map"><svg id="lines" viewBox="0 0 100 100" preserveAspectRatio="none"></svg><div class="center"><span style="font-size:42px">◎</span><strong>Mi visión</strong><small>Educar · Crear · Automatizar · Sostener</small></div><div id="nodes"></div></div></article><aside class="panel"><div class="head"><div><h2>Plan operativo</h2><p>Lo que pide atención ahora</p></div><button class="mini" data-filter="alta">Prioridad alta</button></div><div id="actions" class="actions"></div><div class="load"><div class="meter" id="meter"><span>0</span></div><div><b>Semáforo de carga</b><p id="loadTxt" class="muted">Calculando.</p></div></div></aside></div></section>
+  <section id="cards" class="view"><div class="head"><div><h2>Tarjetas interactivas</h2><p>Porcentaje, pendientes, estado y siguiente acción por proyecto.</p></div><button class="mini" data-filter="alta">Ver prioridad alta</button></div><div id="grid" class="grid"></div></section>
+  <p class="note">Los porcentajes son estimaciones iniciales. La siguiente fase será conectarlos con bitácoras reales: avances, pendientes, decisiones y bloqueos.</p>
+</main>
+</div><div id="toast" class="toast"></div>
+<script>
+(()=>{"use strict";
+const C={educacion:"#22c55e",recursos:"#3b82f6",marca:"#ec4899",software:"#f59e0b",formacion:"#eab308",vida:"#14b8a6",consultoria:"#8b5cf6"};
+const A={educacion:["Educación institucional","▣",50,14,C.educacion,"educacion"],recursos:["Recursos con IA","✦",18,35,C.recursos,"recursos"],marca:["Marca personal","☉",82,37,C.marca,"monetizacion"],software:["Software & IA","⌘",22,70,C.software,"software"],formacion:["Formación","△",50,86,C.formacion,"formacion"],vida:["Vida personal","♡",78,72,C.vida,"vida-personal"],consultoria:["Consultoría","▤",9,55,C.consultoria,"consultoria"]};
+const P=[
+["docencia-ie-el-recreo","Docencia IE El Recreo","educacion",["educacion","institucional","evaluacion","planeacion","feria"],"Activo permanente","Alta",78,6,"▣","Trabajo principal: clases, planeaciones, notas, asistencias, controles diarios, desempeños, ESTEMBRANDO, CafeTech, CafeSec, feria, malla, plan curricular y actas.","Crear tablero por grado, materia, evidencia pendiente y notas mínimas.",["ESTEMBRANDO","CafeTech","CafeSec","Feria de Ciencia y Tecnología"],["Cuesta cerrar notas y evidencias","Notificaciones nocturnas fáciles de ignorar"]],
+["recursos-educativos-ia-tecnologia","Recursos Educativos con IA y Tecnología","recursos",["educacion","ia","recursos","guias","offline"],"Activo","Alta",72,5,"▥","Guías PDF, HTML offline, Cornell, laboratorios virtuales, plantillas, rúbricas y apps de clase.","Separar plantillas maestras, recursos de prueba y recursos listos para publicar.",["Guías HTML","PDF imprimibles","Laboratorios","Rúbricas"],["Muchas versiones sueltas","Falta plantilla maestra estable"]],
+["orion-agentes-docentes","ORIÓN · Agentes Docentes","software",["ia","automatizacion","educacion","github","agentes","software"],"Conceptual / en diseño","Media",28,4,"✦","Sistema de agentes: ORIÓN recibe intención, MERLIN genera recursos y SÉNECA valida calidad y coherencia.","Definir un MVP: generar una guía desde formulario y dejarla lista para revisión.",["ORIÓN","MERLIN","SÉNECA","Repositorio de plantillas"],["Puede crecer demasiado","Necesita criterios claros"]],
+["el-profe-que-aprende","El Profe Que Aprende","marca",["marca-personal","monetizacion","educacion","contenido","recursos"],"Activo estratégico","Alta",46,7,"☉","Marca educativa, contenido, comunidad, recursos, blogs, sitio web y monetización.","Crear un pipeline mínimo: idea, guion, asset, publicación y recurso asociado.",["TikTok / Reels / YouTube / Facebook","elprofequeaprende.com","Generador autónomo de recursos","Kits digitales"],["Rentable, pero consume tiempo","Falta sistema realista"]],
+["sinapsis-lighthouse","Sinapsis / Lighthouse","educacion",["educacion","formacion-privada","emprendimiento","estudiantes","programacion"],"En operación","Alta",67,5,"◌","Clases infantiles y juveniles, convenio Lighthouse, Scratch, Micro:bit, construcción y juegos estudiantiles.","Formalizar ruta por niveles y separar infantil, juvenil y Lighthouse dentro del tablero.",["Infantil tipo Lego","Juveniles Scratch / Micro:bit","Convenio Lighthouse","Juegos: Martín, Samantha, Emanuel y otros"],["Investigar línea infantil Lego","Formalizar niveles, precios y evidencias"]],
+["plataforma-educativa-integral","Plataforma Educativa Integral","software",["software","educacion","gestion-institucional","convivencia","notas"],"Idea avanzada","Media",15,3,"▤","Plataforma simple para notas, asistencia, observaciones, convivencia, comités y consulta de familias.","Definir MVP: notas + asistencia + observaciones básicas antes de convivencia y comités.",["Módulo académico","Módulo convivencial / ORIENTA","Comités","Familias"],["Proyecto grande","Debe ser simple para docentes aversos"]],
+["formacion-personal-profesional","Formación Personal y Profesional","formacion",["crecimiento","academico","profesional","ingles","doctorado","formacion"],"Activo","Media",55,4,"△","Doctorado, inglés, IA, eventos, convocatorias, portafolio, ingreso, ascenso y certificaciones.","Crear portafolio cronológico de logros, certificados y participaciones.",["Doctorado","Inglés","IA","Ingreso y ascenso"],["Sobrecarga","Trasnocho","Tensión con vida familiar"]],
+["vida-familia-sostenibilidad","Vida, Familia y Sostenibilidad","vida",["vida-personal","bienestar","familia","sueno","limites"],"Activo permanente","Alta",62,4,"♡","Sueño, salud, pareja, Matteo, rutinas familiares, entrenamientos, finanzas y límites de carga.","Crear semáforo de sobrecarga que cruce sueño, pendientes y proyectos activos.",["Rutina de sueño","Organización familiar","Tiempo de pareja","Entrenamientos"],["Los proyectos invaden la noche","El cansancio afecta cierres"]],
+["tecnologia-automatizacion-experimentacion","Tecnología, Automatización y Experimentación","software",["software","ia","herramientas","automatizacion","pwa"],"Activo","Media",50,5,"⌘","GitHub, Vercel, MongoDB, PWA, ChatGPT, agentes, MCP, apps, automatizaciones y hardware personal.","Priorizar la PWA Radar Estratégico como interfaz visual del mapa.",["PWA Radar Estratégico","Automatizaciones GitHub","Prototipos educativos","Herramientas de voz"],["Puede dispersar atención","Curiosidad técnica compite con urgencias"]],
+["consultoria-hr-suite","Consultoría HR Suite / Nómina","consultoria",["consultoria","software","nomina","documentacion"],"Ocasional","Media",40,2,"▤","Revisión técnica, roadmaps, casos puntuales, validación de archivos, reuniones con Víctor y documentación.","Mantenerlo como frente ocasional con límites estrictos.",["Casos de nómina","Roadmaps","Revisión de integridad"],["Puede consumir tiempo","Respetar 2 horas de reunión y 90 minutos de tarea"]],
+["mapa-estrategico-proyectos","Mapa Estratégico de Proyectos","software",["sistema-personal","automatizacion","visualizacion","software","ia"],"En construcción","Alta",64,5,"◎","Radar central para visualizar proyectos, avances, decisiones, bloqueos y siguientes acciones.","Conectar bitácoras de cierre diario con avances, pendientes, decisiones y bloqueos.",["GitHub Pages","Hub radial","Tarjetas con porcentajes","Bitácoras YAML"],["Aún falta automatizar el registro real","Los porcentajes todavía son estimados"]]
+].map(x=>({id:x[0],name:x[1],area:x[2],cats:x[3],status:x[4],prio:x[5],prog:x[6],pend:x[7],ico:x[8],obj:x[9],next:x[10],subs:x[11],pain:x[12]}));
+const S={view:"hub",filter:"todos",q:""},$=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)],norm=s=>String(s??"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+function match(p){let f=S.filter;if(f==="todos")return true;if(f==="alta")return p.prio==="Alta";if(f==="monetizacion")return p.cats.includes("monetizacion")||p.area==="marca";if(f==="vida-personal")return p.cats.includes("vida-personal")||p.area==="vida";if(f==="ia")return p.cats.includes("ia")||p.cats.includes("agentes");return p.cats.includes(f)||p.area===f}
+function text(p){return norm([p.name,A[p.area][0],p.status,p.prio,p.obj,p.next,...p.cats,...p.subs,...p.pain].join(" "))}
+function vis(){let q=norm(S.q.trim());return P.filter(p=>match(p)&&(!q||text(p).includes(q)))}
+function active(){$$("[data-filter]").forEach(b=>b.classList.toggle("on",b.dataset.filter===S.filter));$$("[data-view]").forEach(b=>b.classList.toggle("on",b.dataset.view===S.view));$("#hub").classList.toggle("on",S.view==="hub");$("#cards").classList.toggle("on",S.view==="cards")}
+function render(){let v=vis();$("#stTotal").textContent=v.length;$("#stAvg").textContent=(v.length?Math.round(v.reduce((s,p)=>s+p.prog,0)/v.length):0)+"%";$("#stHigh").textContent=v.filter(p=>p.prio==="Alta").length;$("#stPend").textContent=v.reduce((s,p)=>s+p.pend,0);hub(v);cards(v);active()}
+function hub(v){let nodes=$("#nodes"),lines=$("#lines");nodes.innerHTML="";lines.innerHTML="";let groups=Object.keys(A).map(k=>{let ps=v.filter(p=>p.area===k),avg=ps.length?Math.round(ps.reduce((s,p)=>s+p.prog,0)/ps.length):0;return{k,ps,avg,a:A[k]}}).filter(g=>g.ps.length);$("#sub").textContent=`${v.length} proyectos visibles · ${groups.length} áreas conectadas`;groups.forEach(g=>{let [name,ic,x,y,color,filter]=g.a,ln=document.createElementNS("http://www.w3.org/2000/svg","line");ln.setAttribute("x1",50);ln.setAttribute("y1",50);ln.setAttribute("x2",x);ln.setAttribute("y2",y);ln.setAttribute("stroke",color);lines.appendChild(ln);let n=document.createElement("button");n.className="area";n.style.left=x+"%";n.style.top=y+"%";n.innerHTML=`<div class="ah"><span class="ai" style="background:${color}">${ic}</span><span><b>${name}</b><br><small>${g.ps.length} proyecto${g.ps.length===1?"":"s"} · ${g.avg}%</small></span></div><div class="bar"><i style="width:${g.avg}%;background:${color}"></i></div><div class="miniTags">${g.ps.slice(0,3).map(p=>`<em>${p.name.split(" ")[0]}</em>`).join("")}</div>`;n.onclick=()=>{S.filter=filter;render()};nodes.appendChild(n)});if(!v.length)nodes.innerHTML='<div class="empty">No hay proyectos con el filtro actual.</div>';actions(v);load(v)}
+function actions(v){let box=$("#actions"),top=[...v].sort((a,b)=>(b.prio==="Alta")-(a.prio==="Alta")||b.pend-a.pend).slice(0,5);box.innerHTML=top.length?top.map(p=>`<article class="act" style="border-left-color:${A[p.area][4]}"><b>${p.name}</b><p>${p.next}</p></article>`).join(""):'<div class="empty">No hay acciones visibles.</div>'}
+function load(v){let score=Math.min(100,Math.round(v.reduce((s,p)=>s+p.pend,0)*4+v.filter(p=>p.prio==="Alta").length*8+20)),m=$("#meter");m.style.background=`conic-gradient(var(--a) 0deg,var(--b) ${score*3.6}deg,#e5eaf1 ${score*3.6}deg)`;m.querySelector("span").textContent=score;$("#loadTxt").textContent=score>=75?"Alta carga operativa. Cerrar pendientes antes de abrir frentes nuevos.":score>=50?"Carga moderada. El sistema requiere foco y cierre de evidencias.":"Carga controlada. Prioriza una acción concreta."}
+function cards(v){let grid=$("#grid");grid.innerHTML=v.length?v.map(p=>{let ar=A[p.area],high=p.prio==="Alta";return`<article class="card" style="--c:${ar[4]}"><div class="top"><div style="display:flex;gap:12px"><span class="ico">${p.ico}</span><div><h3>${p.name}</h3><div class="muted">${ar[0]} · ${p.status}</div></div></div><span class="badge ${high?"high":""}">${p.prio}</span></div><div><div class="row"><span>Avance estimado</span><span>${p.prog}%</span></div><div class="progress"><i style="width:${p.prog}%"></i></div></div><div class="row"><span>Pendientes</span><span>${p.pend}</span></div><p>${p.obj}</p><div class="next"><small>Siguiente acción</small><p>${p.next}</p></div><details><summary>Ver subproyectos y dolores</summary><div class="tags">${p.subs.map(s=>`<span class="tag">${s}</span>`).join("")}</div><ul>${p.pain.map(s=>`<li>${s}</li>`).join("")}</ul></details></article>`}).join(""):'<div class="empty">No hay proyectos para mostrar.</div>'}
+document.addEventListener("click",e=>{let f=e.target.closest("[data-filter]"),v=e.target.closest("[data-view]");if(f){S.filter=f.dataset.filter;render()}if(v){S.view=v.dataset.view;render()}});
+$("#q").addEventListener("input",e=>{S.q=e.target.value;render()});
+$("#copy").onclick=()=>{let v=vis(),t=["# Cierre de proyectos","",`Filtro: ${S.filter}`,`Proyectos: ${v.length}`,"","## Próximas acciones",...v.slice(0,8).map(p=>`- ${p.name}: ${p.next}`)].join("\n");navigator.clipboard?.writeText(t).then(()=>{let x=$("#toast");x.textContent="Cierre copiado al portapapeles.";x.classList.add("show");setTimeout(()=>x.classList.remove("show"),2400)})};
+render();
+})();
+</script>
 </body>
 </html>
