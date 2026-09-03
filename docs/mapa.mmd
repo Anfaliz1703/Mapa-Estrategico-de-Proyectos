@@ -1,25 +1,17 @@
-flowchart TD
-    CENTRO["Andrés Lizcano Corrales<br/>Organizar visualmente proyectos de vida, docencia, tecnología y creación de contenido."]:::center
+flowchart LR
+    CENTRO["Andrés Lizcano Corrales<br/><small>Organizar visualmente proyectos de vida, docencia, tecnología y creación de contenido.</small>"]:::center
 
-    CENTRO --> EPQA["El Profe Que Aprende<br/><small>Marca educativa · En crecimiento</small>"]:::project
-    EPQA --- EPQA_ALCANCE["Alcance:<br/>• Guiones para videos<br/>• Miniaturas y piezas visuales<br/>• Recursos educativos descargables<br/>• Calendario de publicación"]:::scope
-    EPQA --- EPQA_ENTREGABLES["Entregables:<br/>• Videos cortos<br/>• Posts<br/>• Kits digitales<br/>• Sitio o repositorio de recursos"]:::deliverable
-    CENTRO --> GUIAS_INTERACTIVAS["Guías Interactivas Offline<br/><small>Producto pedagógico · Funcional / iterando</small>"]:::project
-    GUIAS_INTERACTIVAS --- GUIAS_INTERACTIVAS_ALCANCE["Alcance:<br/>• Lectura guiada<br/>• Método Cornell<br/>• Laboratorio virtual<br/>• Evidencias para cuaderno"]:::scope
-    GUIAS_INTERACTIVAS --- GUIAS_INTERACTIVAS_ENTREGABLES["Entregables:<br/>• HTML offline<br/>• PDF imprimible<br/>• Rúbricas"]:::deliverable
-    CENTRO --> ORION_AGENTES["ORIÓN · Agentes Docentes<br/><small>Automatización / IA · Prototipo conceptual</small>"]:::project
-    ORION_AGENTES --- ORION_AGENTES_ALCANCE["Alcance:<br/>• Agente generador<br/>• Agente validador<br/>• Agente organizador<br/>• Control de versiones en GitHub"]:::scope
-    ORION_AGENTES --- ORION_AGENTES_ENTREGABLES["Entregables:<br/>• Prompts base<br/>• Flujo de revisión<br/>• Repositorio de materiales"]:::deliverable
-    CENTRO --> SINAPSIS["Sinapsis / Tecnoclan<br/><small>Formación tecnológica · En operación</small>"]:::project
-    SINAPSIS --- SINAPSIS_ALCANCE["Alcance:<br/>• Clases por niveles<br/>• Micro:bit<br/>• Pensamiento computacional<br/>• Proyectos demostrables"]:::scope
-    SINAPSIS --- SINAPSIS_ENTREGABLES["Entregables:<br/>• Planes de clase<br/>• Evidencias en video<br/>• Ruta de formación"]:::deliverable
-    CENTRO --> MAPA_ESTRATEGICO["Mapa Estratégico de Proyectos<br/><small>Sistema visual personal · MVP de prueba</small>"]:::project
-    MAPA_ESTRATEGICO --- MAPA_ESTRATEGICO_ALCANCE["Alcance:<br/>• Archivo fuente YAML<br/>• Diagrama Mermaid<br/>• README visual<br/>• Página HTML interactiva"]:::scope
-    MAPA_ESTRATEGICO --- MAPA_ESTRATEGICO_ENTREGABLES["Entregables:<br/>• Mapa conceptual<br/>• Vista web<br/>• Base para automatización futura"]:::deliverable
-    CENTRO --> LABORATORIO_VISUAL_PRUEBA["Laboratorio Visual de Prueba<br/><small>Proyecto ficticio de validación · Prueba controlada</small>"]:::project
-    LABORATORIO_VISUAL_PRUEBA --- LABORATORIO_VISUAL_PRUEBA_ALCANCE["Alcance:<br/>• Nodo nuevo en el mapa<br/>• Relación con ORIÓN<br/>• Relación con Mapa Estratégico<br/>• Entregables mínimos de prueba"]:::scope
-    LABORATORIO_VISUAL_PRUEBA --- LABORATORIO_VISUAL_PRUEBA_ENTREGABLES["Entregables:<br/>• Nodo Mermaid de validación<br/>• Actualización del README<br/>• Confirmación del flujo de edición"]:::deliverable
+    subgraph AREA_SIN_AREA["sin-area"]
+        EPQA["El Profe Que Aprende<br/><small>Marca educativa · En crecimiento · Prioridad Sin prioridad</small>"]:::project
+        GUIAS_INTERACTIVAS["Guías Interactivas Offline<br/><small>Producto pedagógico · Funcional / iterando · Prioridad Sin prioridad</small>"]:::project
+        ORION_AGENTES["ORIÓN · Agentes Docentes<br/><small>Automatización / IA · Prototipo conceptual · Prioridad Sin prioridad</small>"]:::project
+        SINAPSIS["Sinapsis / Tecnoclan<br/><small>Formación tecnológica · En operación · Prioridad Sin prioridad</small>"]:::project
+        MAPA_ESTRATEGICO["Mapa Estratégico de Proyectos<br/><small>Sistema visual personal · MVP de prueba · Prioridad Sin prioridad</small>"]:::project
+        LABORATORIO_VISUAL_PRUEBA["Laboratorio Visual de Prueba<br/><small>Proyecto ficticio de validación · Prueba controlada · Prioridad Sin prioridad</small>"]:::project
+    end
+    CENTRO --> AREA_SIN_AREA
 
+    %% Relaciones entre proyectos
     EPQA --> GUIAS_INTERACTIVAS
     EPQA --> SINAPSIS
     GUIAS_INTERACTIVAS --> ORION_AGENTES
@@ -34,7 +26,18 @@ flowchart TD
     LABORATORIO_VISUAL_PRUEBA --> MAPA_ESTRATEGICO
     LABORATORIO_VISUAL_PRUEBA --> ORION_AGENTES
 
+    %% Próximas acciones
+
     classDef center fill:#111827,stroke:#38bdf8,color:#ffffff,stroke-width:2px;
-    classDef project fill:#2563eb,stroke:#1e3a8a,color:#ffffff;
-    classDef scope fill:#f8fafc,stroke:#94a3b8,color:#0f172a;
-    classDef deliverable fill:#ecfeff,stroke:#0891b2,color:#164e63;
+    classDef alta fill:#2563eb,stroke:#1e3a8a,color:#ffffff,stroke-width:2px;
+    classDef media fill:#0f766e,stroke:#134e4a,color:#ffffff;
+    classDef baja fill:#64748b,stroke:#334155,color:#ffffff;
+    classDef project fill:#475569,stroke:#1e293b,color:#ffffff;
+    classDef next fill:#f8fafc,stroke:#94a3b8,color:#0f172a;
+    style AREA_EDUCACION fill:#eff6ff,stroke:#93c5fd,color:#0f172a
+    style AREA_RECURSOS fill:#ecfeff,stroke:#67e8f9,color:#0f172a
+    style AREA_MARCA fill:#fff7ed,stroke:#fdba74,color:#0f172a
+    style AREA_SOFTWARE fill:#f5f3ff,stroke:#c4b5fd,color:#0f172a
+    style AREA_FORMACION fill:#f0fdf4,stroke:#86efac,color:#0f172a
+    style AREA_VIDA fill:#fdf2f8,stroke:#f9a8d4,color:#0f172a
+    style AREA_CONSULTORIA fill:#f8fafc,stroke:#cbd5e1,color:#0f172a
