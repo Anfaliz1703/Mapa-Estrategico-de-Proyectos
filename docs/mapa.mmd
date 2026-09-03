@@ -16,6 +16,9 @@ flowchart TD
     CENTRO --> MAPA_ESTRATEGICO["Mapa Estratégico de Proyectos<br/><small>Sistema visual personal · MVP de prueba</small>"]:::project
     MAPA_ESTRATEGICO --- MAPA_ESTRATEGICO_ALCANCE["Alcance:<br/>• Archivo fuente YAML<br/>• Diagrama Mermaid<br/>• README visual<br/>• Página HTML interactiva"]:::scope
     MAPA_ESTRATEGICO --- MAPA_ESTRATEGICO_ENTREGABLES["Entregables:<br/>• Mapa conceptual<br/>• Vista web<br/>• Base para automatización futura"]:::deliverable
+    CENTRO --> LABORATORIO_VISUAL_PRUEBA["Laboratorio Visual de Prueba<br/><small>Proyecto ficticio de validación · Prueba controlada</small>"]:::project
+    LABORATORIO_VISUAL_PRUEBA --- LABORATORIO_VISUAL_PRUEBA_ALCANCE["Alcance:<br/>• Nodo nuevo en el mapa<br/>• Relación con ORIÓN<br/>• Relación con Mapa Estratégico<br/>• Entregables mínimos de prueba"]:::scope
+    LABORATORIO_VISUAL_PRUEBA --- LABORATORIO_VISUAL_PRUEBA_ENTREGABLES["Entregables:<br/>• Nodo Mermaid de validación<br/>• Actualización del README<br/>• Confirmación del flujo de edición"]:::deliverable
 
     EPQA --> GUIAS_INTERACTIVAS
     EPQA --> SINAPSIS
@@ -23,9 +26,13 @@ flowchart TD
     GUIAS_INTERACTIVAS --> EPQA
     ORION_AGENTES --> GUIAS_INTERACTIVAS
     ORION_AGENTES --> MAPA_ESTRATEGICO
+    ORION_AGENTES --> LABORATORIO_VISUAL_PRUEBA
     SINAPSIS --> EPQA
     MAPA_ESTRATEGICO --> ORION_AGENTES
     MAPA_ESTRATEGICO --> EPQA
+    MAPA_ESTRATEGICO --> LABORATORIO_VISUAL_PRUEBA
+    LABORATORIO_VISUAL_PRUEBA --> MAPA_ESTRATEGICO
+    LABORATORIO_VISUAL_PRUEBA --> ORION_AGENTES
 
     classDef center fill:#111827,stroke:#38bdf8,color:#ffffff,stroke-width:2px;
     classDef project fill:#2563eb,stroke:#1e3a8a,color:#ffffff;
