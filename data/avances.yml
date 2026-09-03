@@ -1,0 +1,14 @@
+# Bitácora de avances diarios.
+# Cada entrada puede venir del cierre nocturno, de un chat o de una actualización manual.
+#
+# Formato sugerido:
+# - fecha: "2026-09-02"
+#   proyecto: "mapa-estrategico-proyectos"
+#   origen: "cierre nocturno / chat / commit"
+#   avances:
+#     - "Se actualizó la estructura real de proyectos."
+#   evidencia:
+#     - "projects.yml"
+#   siguiente_accion: "Crear dashboard de bitácora."
+
+avances: []
