@@ -1,0 +1,11 @@
+# Pendientes por proyecto.
+# Usar para tareas concretas que aún no están cerradas.
+#
+# Formato sugerido:
+# - proyecto: "docencia-ie-el-recreo"
+#   pendiente: "Registrar notas mínimas por grado y materia."
+#   prioridad: "alta"
+#   fecha_limite: null
+#   estado: "abierto"
+
+pendientes: []
