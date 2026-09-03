@@ -1,32 +1,102 @@
 flowchart LR
-    CENTRO["Andrés Lizcano Corrales<br/><small>Organizar visualmente proyectos de vida, docencia, tecnología y creación de contenido.</small>"]:::center
+    CENTRO["Andrés Lizcano Corrales<br/><small>Organizar visualmente docencia, tecnología, IA, marca personal, formación y vida familiar sin perder el control operati…</small>"]:::center
 
-    subgraph AREA_SIN_AREA["sin-area"]
-        EPQA["El Profe Que Aprende<br/><small>Marca educativa · En crecimiento · Prioridad Sin prioridad</small>"]:::project
-        GUIAS_INTERACTIVAS["Guías Interactivas Offline<br/><small>Producto pedagógico · Funcional / iterando · Prioridad Sin prioridad</small>"]:::project
-        ORION_AGENTES["ORIÓN · Agentes Docentes<br/><small>Automatización / IA · Prototipo conceptual · Prioridad Sin prioridad</small>"]:::project
-        SINAPSIS["Sinapsis / Tecnoclan<br/><small>Formación tecnológica · En operación · Prioridad Sin prioridad</small>"]:::project
-        MAPA_ESTRATEGICO["Mapa Estratégico de Proyectos<br/><small>Sistema visual personal · MVP de prueba · Prioridad Sin prioridad</small>"]:::project
-        LABORATORIO_VISUAL_PRUEBA["Laboratorio Visual de Prueba<br/><small>Proyecto ficticio de validación · Prueba controlada · Prioridad Sin prioridad</small>"]:::project
+    subgraph AREA_EDUCACION["Educación institucional"]
+        DOCENCIA_IE_EL_RECREO["Docencia IE El Recreo<br/><small>Trabajo principal · Activo permanente · Prioridad Alta</small>"]:::alta
+        SINAPSIS_LIGHTHOUSE["Sinapsis / Lighthouse<br/><small>Formación tecnológica privada · En operación · Prioridad Alta</small>"]:::alta
     end
-    CENTRO --> AREA_SIN_AREA
+    CENTRO --> AREA_EDUCACION
+
+    subgraph AREA_RECURSOS["Recursos educativos"]
+        RECURSOS_EDUCATIVOS_IA_TECNOLOGIA["Recursos Educativos con IA y Tecnología<br/><small>Producción pedagógica · Activo · Prioridad Alta</small>"]:::alta
+    end
+    CENTRO --> AREA_RECURSOS
+
+    subgraph AREA_SOFTWARE["Software, IA y automatización"]
+        ORION_AGENTES_DOCENTES["ORIÓN · Agentes Docentes<br/><small>Sistema interno de automatización · Conceptual / en diseño · Prioridad Media</small>"]:::media
+        PLATAFORMA_EDUCATIVA_INTEGRAL["Plataforma Educativa Integral<br/><small>Producto software educativo · Idea avanzada · Prioridad Media</small>"]:::media
+        TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION["Tecnología, Automatización y Experimentación<br/><small>Laboratorio técnico personal · Activo · Prioridad Media</small>"]:::media
+        MAPA_ESTRATEGICO_PROYECTOS["Mapa Estratégico de Proyectos<br/><small>Radar de mando personal · En construcción · Prioridad Alta</small>"]:::alta
+    end
+    CENTRO --> AREA_SOFTWARE
+
+    subgraph AREA_MARCA["Marca personal y monetización"]
+        EL_PROFE_QUE_APRENDE["El Profe Que Aprende<br/><small>Marca educativa y negocio digital · Activo estratégico · Prioridad Alta</small>"]:::alta
+    end
+    CENTRO --> AREA_MARCA
+
+    subgraph AREA_FORMACION["Formación y crecimiento"]
+        FORMACION_PERSONAL_PROFESIONAL["Formación Personal y Profesional<br/><small>Crecimiento profesional · Activo · Prioridad Media</small>"]:::media
+    end
+    CENTRO --> AREA_FORMACION
+
+    subgraph AREA_VIDA["Vida personal y sostenibilidad"]
+        VIDA_FAMILIA_SOSTENIBILIDAD["Vida, Familia y Sostenibilidad<br/><small>Sistema de equilibrio personal · Activo permanente · Prioridad Alta</small>"]:::alta
+    end
+    CENTRO --> AREA_VIDA
+
+    subgraph AREA_CONSULTORIA["Consultoría técnica"]
+        CONSULTORIA_HR_SUITE["Consultoría HR Suite / Nómina<br/><small>Consultoría técnica externa · Ocasional · Prioridad Media</small>"]:::media
+    end
+    CENTRO --> AREA_CONSULTORIA
 
     %% Relaciones entre proyectos
-    EPQA --> GUIAS_INTERACTIVAS
-    EPQA --> SINAPSIS
-    GUIAS_INTERACTIVAS --> ORION_AGENTES
-    GUIAS_INTERACTIVAS --> EPQA
-    ORION_AGENTES --> GUIAS_INTERACTIVAS
-    ORION_AGENTES --> MAPA_ESTRATEGICO
-    ORION_AGENTES --> LABORATORIO_VISUAL_PRUEBA
-    SINAPSIS --> EPQA
-    MAPA_ESTRATEGICO --> ORION_AGENTES
-    MAPA_ESTRATEGICO --> EPQA
-    MAPA_ESTRATEGICO --> LABORATORIO_VISUAL_PRUEBA
-    LABORATORIO_VISUAL_PRUEBA --> MAPA_ESTRATEGICO
-    LABORATORIO_VISUAL_PRUEBA --> ORION_AGENTES
+    DOCENCIA_IE_EL_RECREO --> RECURSOS_EDUCATIVOS_IA_TECNOLOGIA
+    DOCENCIA_IE_EL_RECREO --> ORION_AGENTES_DOCENTES
+    DOCENCIA_IE_EL_RECREO --> PLATAFORMA_EDUCATIVA_INTEGRAL
+    DOCENCIA_IE_EL_RECREO --> MAPA_ESTRATEGICO_PROYECTOS
+    RECURSOS_EDUCATIVOS_IA_TECNOLOGIA --> DOCENCIA_IE_EL_RECREO
+    RECURSOS_EDUCATIVOS_IA_TECNOLOGIA --> ORION_AGENTES_DOCENTES
+    RECURSOS_EDUCATIVOS_IA_TECNOLOGIA --> EL_PROFE_QUE_APRENDE
+    RECURSOS_EDUCATIVOS_IA_TECNOLOGIA --> SINAPSIS_LIGHTHOUSE
+    RECURSOS_EDUCATIVOS_IA_TECNOLOGIA --> MAPA_ESTRATEGICO_PROYECTOS
+    ORION_AGENTES_DOCENTES --> RECURSOS_EDUCATIVOS_IA_TECNOLOGIA
+    ORION_AGENTES_DOCENTES --> DOCENCIA_IE_EL_RECREO
+    ORION_AGENTES_DOCENTES --> EL_PROFE_QUE_APRENDE
+    ORION_AGENTES_DOCENTES --> TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION
+    ORION_AGENTES_DOCENTES --> MAPA_ESTRATEGICO_PROYECTOS
+    EL_PROFE_QUE_APRENDE --> RECURSOS_EDUCATIVOS_IA_TECNOLOGIA
+    EL_PROFE_QUE_APRENDE --> ORION_AGENTES_DOCENTES
+    EL_PROFE_QUE_APRENDE --> SINAPSIS_LIGHTHOUSE
+    EL_PROFE_QUE_APRENDE --> TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION
+    EL_PROFE_QUE_APRENDE --> MAPA_ESTRATEGICO_PROYECTOS
+    SINAPSIS_LIGHTHOUSE --> RECURSOS_EDUCATIVOS_IA_TECNOLOGIA
+    SINAPSIS_LIGHTHOUSE --> EL_PROFE_QUE_APRENDE
+    SINAPSIS_LIGHTHOUSE --> MAPA_ESTRATEGICO_PROYECTOS
+    PLATAFORMA_EDUCATIVA_INTEGRAL --> DOCENCIA_IE_EL_RECREO
+    PLATAFORMA_EDUCATIVA_INTEGRAL --> TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION
+    PLATAFORMA_EDUCATIVA_INTEGRAL --> MAPA_ESTRATEGICO_PROYECTOS
+    FORMACION_PERSONAL_PROFESIONAL --> EL_PROFE_QUE_APRENDE
+    FORMACION_PERSONAL_PROFESIONAL --> VIDA_FAMILIA_SOSTENIBILIDAD
+    FORMACION_PERSONAL_PROFESIONAL --> MAPA_ESTRATEGICO_PROYECTOS
+    VIDA_FAMILIA_SOSTENIBILIDAD --> FORMACION_PERSONAL_PROFESIONAL
+    VIDA_FAMILIA_SOSTENIBILIDAD --> DOCENCIA_IE_EL_RECREO
+    VIDA_FAMILIA_SOSTENIBILIDAD --> EL_PROFE_QUE_APRENDE
+    VIDA_FAMILIA_SOSTENIBILIDAD --> MAPA_ESTRATEGICO_PROYECTOS
+    TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION --> MAPA_ESTRATEGICO_PROYECTOS
+    TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION --> ORION_AGENTES_DOCENTES
+    TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION --> PLATAFORMA_EDUCATIVA_INTEGRAL
+    TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION --> EL_PROFE_QUE_APRENDE
+    CONSULTORIA_HR_SUITE --> TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION
+    CONSULTORIA_HR_SUITE --> MAPA_ESTRATEGICO_PROYECTOS
+    MAPA_ESTRATEGICO_PROYECTOS --> DOCENCIA_IE_EL_RECREO
+    MAPA_ESTRATEGICO_PROYECTOS --> RECURSOS_EDUCATIVOS_IA_TECNOLOGIA
+    MAPA_ESTRATEGICO_PROYECTOS --> EL_PROFE_QUE_APRENDE
+    MAPA_ESTRATEGICO_PROYECTOS --> SINAPSIS_LIGHTHOUSE
+    MAPA_ESTRATEGICO_PROYECTOS --> TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION
 
     %% Próximas acciones
+    DOCENCIA_IE_EL_RECREO -.-> DOCENCIA_IE_EL_RECREO_SIG["Siguiente:<br/>Crear tablero por grado, materia, evidencia pendiente y notas mínimas."]:::next
+    RECURSOS_EDUCATIVOS_IA_TECNOLOGIA -.-> RECURSOS_EDUCATIVOS_IA_TECNOLOGIA_SIG["Siguiente:<br/>Separar plantillas maestras, recursos de prueba y recursos listos para publicar."]:::next
+    ORION_AGENTES_DOCENTES -.-> ORION_AGENTES_DOCENTES_SIG["Siguiente:<br/>Definir un MVP: generar una guía desde formulario y dejarla lista para revisión."]:::next
+    EL_PROFE_QUE_APRENDE -.-> EL_PROFE_QUE_APRENDE_SIG["Siguiente:<br/>Crear un pipeline mínimo: idea, guion, asset, publicación y recurso asociado."]:::next
+    SINAPSIS_LIGHTHOUSE -.-> SINAPSIS_LIGHTHOUSE_SIG["Siguiente:<br/>Formalizar ruta por niveles y separar infantil, juvenil y Lighthouse dentro del tablero."]:::next
+    PLATAFORMA_EDUCATIVA_INTEGRAL -.-> PLATAFORMA_EDUCATIVA_INTEGRAL_SIG["Siguiente:<br/>Definir MVP: notas + asistencia + observaciones básicas antes de convivencia y comités."]:::next
+    FORMACION_PERSONAL_PROFESIONAL -.-> FORMACION_PERSONAL_PROFESIONAL_SIG["Siguiente:<br/>Crear portafolio cronológico de logros, certificados y participaciones."]:::next
+    VIDA_FAMILIA_SOSTENIBILIDAD -.-> VIDA_FAMILIA_SOSTENIBILIDAD_SIG["Siguiente:<br/>Crear semáforo de sobrecarga que cruce sueño, pendientes y proyectos activos."]:::next
+    TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION -.-> TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION_SIG["Siguiente:<br/>Priorizar la PWA Radar Estratégico como interfaz visual del mapa."]:::next
+    CONSULTORIA_HR_SUITE -.-> CONSULTORIA_HR_SUITE_SIG["Siguiente:<br/>Mantenerlo como frente ocasional con límites estrictos."]:::next
+    MAPA_ESTRATEGICO_PROYECTOS -.-> MAPA_ESTRATEGICO_PROYECTOS_SIG["Siguiente:<br/>Agregar bitácoras de avances, pendientes, decisiones y bloqueos."]:::next
 
     classDef center fill:#111827,stroke:#38bdf8,color:#ffffff,stroke-width:2px;
     classDef alta fill:#2563eb,stroke:#1e3a8a,color:#ffffff,stroke-width:2px;
