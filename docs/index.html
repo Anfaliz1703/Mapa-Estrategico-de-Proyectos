@@ -6,168 +6,120 @@
   <title>Mapa Estratégico de Proyectos</title>
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <style>
-    :root {
-      --bg: #07111f;
-      --panel: rgba(15, 23, 42, 0.82);
-      --line: rgba(148, 163, 184, 0.24);
-      --text: #e5edf7;
-      --muted: #94a3b8;
-      --accent: #38bdf8;
-      --accent2: #a78bfa;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(56, 189, 248, 0.20), transparent 34%),
-        radial-gradient(circle at bottom right, rgba(167, 139, 250, 0.18), transparent 34%),
-        var(--bg);
-    }
-
-    header {
-      padding: 36px min(5vw, 56px) 18px;
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(14px);
-    }
-
-    .eyebrow {
-      color: var(--accent);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    h1 {
-      margin: 10px 0 8px;
-      font-size: clamp(32px, 5vw, 64px);
-      line-height: 1;
-    }
-
-    .subtitle {
-      max-width: 850px;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.55;
-    }
-
-    main {
-      padding: 26px min(5vw, 56px) 48px;
-      display: grid;
-      gap: 22px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(160px, 1fr));
-      gap: 14px;
-    }
-
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 18px;
-      box-shadow: 0 20px 70px rgba(0,0,0,.24);
-    }
-
-    .card h3 { margin: 0 0 8px; font-size: 16px; }
-    .card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
-
-    .map-panel {
-      background: rgba(255,255,255,0.95);
-      color: #0f172a;
-      border-radius: 28px;
-      padding: 24px;
-      overflow: auto;
-      box-shadow: 0 24px 100px rgba(0,0,0,.30);
-    }
-
-    .mermaid {
-      min-width: 980px;
-    }
-
-    .note {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    code {
-      color: #bae6fd;
-      background: rgba(15,23,42,.85);
-      padding: 2px 7px;
-      border-radius: 8px;
-    }
-
-    @media (max-width: 980px) {
-      .grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (max-width: 620px) {
-      .grid { grid-template-columns: 1fr; }
-      header, main { padding-left: 18px; padding-right: 18px; }
-    }
+    :root{--bg:#06111f;--panel:rgba(15,23,42,.86);--soft:rgba(255,255,255,.08);--line:rgba(148,163,184,.25);--text:#e5edf7;--muted:#94a3b8;--accent:#38bdf8}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:radial-gradient(circle at top left,rgba(56,189,248,.20),transparent 34%),radial-gradient(circle at bottom right,rgba(167,139,250,.18),transparent 34%),var(--bg)}
+    header{position:sticky;top:0;z-index:10;padding:30px min(5vw,64px) 18px;border-bottom:1px solid var(--line);background:rgba(6,17,31,.88);backdrop-filter:blur(14px)}
+    .eyebrow{color:var(--accent);letter-spacing:.16em;text-transform:uppercase;font-size:12px;font-weight:800}h1{margin:8px 0;font-size:clamp(30px,4.5vw,58px);line-height:1}.subtitle{max-width:980px;color:var(--muted);font-size:17px;line-height:1.5}
+    main{padding:24px min(5vw,64px) 48px;display:grid;gap:20px}.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}button,input{border:1px solid var(--line);border-radius:999px;background:var(--soft);color:var(--text);padding:10px 14px;font:inherit}button{cursor:pointer}button.active,button:hover{background:rgba(56,189,248,.20);border-color:rgba(56,189,248,.65)}input{min-width:min(390px,100%);outline:0}
+    .stats{display:grid;grid-template-columns:repeat(4,minmax(160px,1fr));gap:14px}.stat,.card,.map-panel{background:var(--panel);border:1px solid var(--line);border-radius:24px;box-shadow:0 20px 70px rgba(0,0,0,.24)}.stat{padding:18px}.stat strong{display:block;font-size:30px}.stat span{color:var(--muted);font-size:13px}
+    .layout{display:grid;grid-template-columns:minmax(320px,.9fr) minmax(520px,1.4fr);gap:18px;align-items:start}.cards{display:grid;gap:14px}.card{padding:18px}.card h3{margin:0 0 8px;font-size:18px}.meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.pill{border:1px solid var(--line);border-radius:999px;padding:4px 8px;color:#dbeafe;background:rgba(59,130,246,.12);font-size:11px}.pill.high{background:rgba(59,130,246,.25);border-color:rgba(59,130,246,.55)}.pill.medium{background:rgba(20,184,166,.18);border-color:rgba(20,184,166,.48)}.card p{color:var(--muted);line-height:1.48;margin:8px 0;font-size:13.5px}.card details{margin-top:10px;color:var(--muted);font-size:13px}.card summary{color:#dbeafe;cursor:pointer;margin-bottom:7px}ul{margin:7px 0 0 18px;padding:0}
+    .map-panel{padding:18px;overflow:auto;background:rgba(255,255,255,.96);color:#0f172a}.map-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px;font-weight:800}.mermaid{min-width:1180px}.note{color:var(--muted);line-height:1.5;font-size:14px}code{color:#bae6fd;background:rgba(15,23,42,.85);padding:2px 7px;border-radius:8px}
+    @media(max-width:1100px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}@media(max-width:640px){header,main{padding-left:16px;padding-right:16px}.stats{grid-template-columns:1fr}input{width:100%}}
   </style>
 </head>
 <body>
-  <header>
-    <div class="eyebrow">Sistema visual personal</div>
-    <h1>Mapa Estratégico de Proyectos</h1>
-    <p class="subtitle">Una primera interfaz para ver tus proyectos como nodos conectados: alcance, estado, entregables y relaciones. La idea es que esto luego reciba tus proyectos reales desde ChatGPT y los convierta en mapa vivo.</p>
-  </header>
-
-  <main>
-    <section class="grid" aria-label="Resumen de proyectos">
-      <article class="card"><h3>El Profe Que Aprende</h3><p>Marca educativa, contenido, comunidad y recursos.</p></article>
-      <article class="card"><h3>Guías Interactivas</h3><p>Material offline, Cornell, laboratorios y evidencias.</p></article>
-      <article class="card"><h3>ORIÓN</h3><p>Agentes para generar, organizar y validar materiales.</p></article>
-      <article class="card"><h3>Sinapsis</h3><p>Formación tecnológica para niños y jóvenes.</p></article>
-      <article class="card"><h3>Mapa Estratégico</h3><p>Vista central para ordenar vida, trabajo y proyectos.</p></article>
-    </section>
-
+<header>
+  <div class="eyebrow">Radar estratégico personal</div>
+  <h1>Mapa Estratégico de Proyectos</h1>
+  <p class="subtitle">Vista filtrable de los frentes reales de trabajo: docencia, recursos, IA, marca personal, Sinapsis, plataforma educativa, formación, vida familiar, tecnología y consultoría.</p>
+</header>
+<main>
+  <section class="toolbar">
+    <button class="active" data-filter="todos">Todo</button>
+    <button data-filter="educacion">Educación</button>
+    <button data-filter="ia">IA / agentes</button>
+    <button data-filter="software">Software</button>
+    <button data-filter="monetizacion">Monetización</button>
+    <button data-filter="vida-personal">Vida personal</button>
+    <button data-filter="consultoria">Consultoría</button>
+    <button data-filter="alta">Prioridad alta</button>
+    <input id="search" type="search" placeholder="Buscar proyecto, dolor o siguiente acción..." />
+  </section>
+  <section class="stats">
+    <div class="stat"><strong id="stat-total">0</strong><span>proyectos visibles</span></div>
+    <div class="stat"><strong id="stat-high">0</strong><span>prioridad alta</span></div>
+    <div class="stat"><strong id="stat-edu">0</strong><span>relacionados con educación</span></div>
+    <div class="stat"><strong id="stat-soft">0</strong><span>software / IA / automatización</span></div>
+  </section>
+  <section class="layout">
+    <div class="cards" id="cards"></div>
     <section class="map-panel">
+      <div class="map-title"><span>Mapa completo Mermaid</span><small>Fuente: projects.yml</small></div>
       <pre class="mermaid">
-flowchart TD
-    A["Andrés Lizcano Corrales<br/>Vida · Docencia · Tecnología · Contenido"]:::center
-
-    A --> EPQA["El Profe Que Aprende<br/><small>Marca educativa</small>"]:::brand
-    A --> GUIAS["Guías Interactivas Offline<br/><small>Producto pedagógico</small>"]:::education
-    A --> ORION["ORIÓN · Agentes Docentes<br/><small>Automatización / IA</small>"]:::ai
-    A --> SINAPSIS["Sinapsis / Tecnoclan<br/><small>Formación tecnológica</small>"]:::business
-    A --> MAPA["Mapa Estratégico de Proyectos<br/><small>Sistema visual personal</small>"]:::system
-
-    EPQA -->|contenido y comunidad| GUIAS
-    EPQA -->|oferta formativa| SINAPSIS
-    GUIAS -->|materiales base| ORION
-    ORION -->|automatiza mapas| MAPA
-    MAPA -->|claridad estratégica| EPQA
-
-    EPQA --- EPQA_A["Alcance:<br/>Guiones · Miniaturas · Recursos · Calendario"]
-    GUIAS --- GUIAS_A["Alcance:<br/>Lectura · Cornell · Laboratorio · Evidencias"]
-    ORION --- ORION_A["Alcance:<br/>Generador · Validador · Organizador · GitHub"]
-    SINAPSIS --- SINAPSIS_A["Alcance:<br/>Niveles · Micro:bit · PC · Proyectos"]
-    MAPA --- MAPA_A["Alcance:<br/>YAML · Mermaid · README · Web"]
-
+flowchart LR
+    CENTRO["Andrés Lizcano Corrales<br/><small>Radar estratégico personal</small>"]:::center
+    subgraph EDU["Educación institucional"]
+      DOC["Docencia IE El Recreo"]:::alta
+      SIN["Sinapsis / Lighthouse"]:::alta
+    end
+    subgraph REC["Recursos educativos"]
+      RES["Recursos Educativos con IA y Tecnología"]:::alta
+    end
+    subgraph MARCA["Marca personal y monetización"]
+      EPQA["El Profe Que Aprende"]:::alta
+    end
+    subgraph SOFT["Software, IA y automatización"]
+      ORION["ORIÓN · Agentes Docentes"]:::media
+      PLAT["Plataforma Educativa Integral"]:::media
+      TEC["Tecnología, Automatización y Experimentación"]:::media
+      MAPA["Mapa Estratégico de Proyectos"]:::alta
+    end
+    subgraph FORM["Formación y crecimiento"]
+      FP["Formación Personal y Profesional"]:::media
+    end
+    subgraph VIDA["Vida personal y sostenibilidad"]
+      VF["Vida, Familia y Sostenibilidad"]:::alta
+    end
+    subgraph CONS["Consultoría técnica"]
+      HR["Consultoría HR Suite / Nómina"]:::media
+    end
+    CENTRO --> EDU
+    CENTRO --> REC
+    CENTRO --> MARCA
+    CENTRO --> SOFT
+    CENTRO --> FORM
+    CENTRO --> VIDA
+    CENTRO --> CONS
+    DOC --> RES
+    RES --> EPQA
+    RES --> SIN
+    ORION --> RES
+    EPQA --> ORION
+    PLAT --> DOC
+    TEC --> MAPA
+    VF --> DOC
+    VF --> EPQA
+    HR --> TEC
+    MAPA --> DOC
+    MAPA --> EPQA
+    MAPA --> SIN
     classDef center fill:#111827,stroke:#38bdf8,color:#ffffff,stroke-width:2px;
-    classDef brand fill:#f97316,stroke:#7c2d12,color:#ffffff;
-    classDef education fill:#2563eb,stroke:#1e3a8a,color:#ffffff;
-    classDef ai fill:#7c3aed,stroke:#4c1d95,color:#ffffff;
-    classDef business fill:#16a34a,stroke:#14532d,color:#ffffff;
-    classDef system fill:#0f766e,stroke:#134e4a,color:#ffffff;
+    classDef alta fill:#2563eb,stroke:#1e3a8a,color:#ffffff,stroke-width:2px;
+    classDef media fill:#0f766e,stroke:#134e4a,color:#ffffff;
       </pre>
     </section>
-
-    <p class="note">Para modificar el mapa, edita <code>projects.yml</code>. Luego el script <code>scripts/generate_mermaid.py</code> puede generar una versión Mermaid desde la fuente estructurada.</p>
-  </main>
-
-  <script>
-    mermaid.initialize({ startOnLoad: true, theme: "default", securityLevel: "loose" });
-  </script>
+  </section>
+  <p class="note">Los juegos estudiantiles de Martín, Samantha, Emanuel y otros quedan ubicados dentro de <code>Sinapsis / Lighthouse</code>. El archivo estructural es <code>projects.yml</code>.</p>
+</main>
+<script>
+const projects=[
+{id:'docencia-ie-el-recreo',nombre:'Docencia IE El Recreo',area:'educacion',areaNombre:'Educación institucional',categorias:['educacion','institucional','evaluacion','planeacion','feria'],estado:'Activo permanente',prioridad:'Alta',objetivo:'Trabajo principal: clases, planeaciones, notas, asistencias, controles diarios, desempeños, ESTEMBRANDO, CafeTech, CafeSec, feria, malla, plan curricular y actas.',siguiente:'Crear tablero por grado, materia, evidencia pendiente y notas mínimas.',sub:['ESTEMBRANDO','CafeTech','CafeSec','Feria de Ciencia y Tecnología','Seguimiento de notas y evidencias'],dol:['Cuesta cerrar notas y evidencias','Notificaciones nocturnas fáciles de ignorar']},
+{id:'recursos-educativos-ia-tecnologia',nombre:'Recursos Educativos con IA y Tecnología',area:'recursos',areaNombre:'Recursos educativos',categorias:['educacion','ia','recursos','guias','offline'],estado:'Activo',prioridad:'Alta',objetivo:'Guías PDF, HTML offline, Cornell, laboratorios virtuales, plantillas, rúbricas y apps de clase.',siguiente:'Separar plantillas maestras, recursos de prueba y recursos listos para publicar.',sub:['Guías HTML','PDF imprimibles','Laboratorios','Rúbricas','Microherramientas'],dol:['Muchas versiones sueltas','Falta plantilla maestra estable']},
+{id:'orion-agentes-docentes',nombre:'ORIÓN · Agentes Docentes',area:'software',areaNombre:'Software, IA y automatización',categorias:['ia','automatizacion','educacion','github','agentes','software'],estado:'Conceptual / en diseño',prioridad:'Media',objetivo:'Sistema de agentes: ORIÓN recibe intención, MERLIN genera recursos y SÉNECA valida calidad y coherencia.',siguiente:'Definir un MVP: generar una guía desde formulario y dejarla lista para revisión.',sub:['ORIÓN','MERLIN','SÉNECA','Repositorio de plantillas'],dol:['Puede crecer demasiado','Necesita criterios claros']},
+{id:'el-profe-que-aprende',nombre:'El Profe Que Aprende',area:'marca',areaNombre:'Marca personal y monetización',categorias:['marca-personal','monetizacion','educacion','contenido','recursos'],estado:'Activo estratégico',prioridad:'Alta',objetivo:'Marca educativa, contenido, comunidad, recursos, blogs, sitio web y monetización.',siguiente:'Crear un pipeline mínimo: idea, guion, asset, publicación y recurso asociado.',sub:['TikTok/Reels/YouTube/Facebook','elprofequeaprende.com','Generador autónomo de recursos','Kits digitales'],dol:['Rentable, pero consume tiempo','Falta sistema realista']},
+{id:'sinapsis-lighthouse',nombre:'Sinapsis / Lighthouse',area:'educacion',areaNombre:'Educación institucional',categorias:['educacion','formacion-privada','emprendimiento','estudiantes','programacion'],estado:'En operación',prioridad:'Alta',objetivo:'Clases infantiles y juveniles, convenio Lighthouse, Scratch, Micro:bit, construcción y juegos estudiantiles.',siguiente:'Formalizar ruta por niveles y separar infantil, juvenil y Lighthouse dentro del tablero.',sub:['Infantil tipo Lego','Juveniles Scratch/Micro:bit','Convenio Lighthouse','Juegos: Martín, Samantha, Emanuel y otros'],dol:['Investigar línea infantil Lego','Formalizar niveles, precios y evidencias']},
+{id:'plataforma-educativa-integral',nombre:'Plataforma Educativa Integral',area:'software',areaNombre:'Software, IA y automatización',categorias:['software','educacion','gestion-institucional','convivencia','notas'],estado:'Idea avanzada',prioridad:'Media',objetivo:'Plataforma simple para notas, asistencia, observaciones, convivencia, comités y consulta de familias.',siguiente:'Definir MVP: notas + asistencia + observaciones básicas antes de convivencia y comités.',sub:['Módulo académico','Módulo convivencial / ORIENTA','Comités','Familias'],dol:['Proyecto grande','Debe ser simple para docentes aversos']},
+{id:'formacion-personal-profesional',nombre:'Formación Personal y Profesional',area:'formacion',areaNombre:'Formación y crecimiento',categorias:['crecimiento','academico','profesional','ingles','doctorado'],estado:'Activo',prioridad:'Media',objetivo:'Doctorado, inglés, IA, eventos, convocatorias, portafolio, ingreso, ascenso y certificaciones.',siguiente:'Crear portafolio cronológico de logros, certificados y participaciones.',sub:['Doctorado','Inglés','IA','Ingreso y ascenso'],dol:['Sobrecarga','Trasnocho','Tensión con vida familiar']},
+{id:'vida-familia-sostenibilidad',nombre:'Vida, Familia y Sostenibilidad',area:'vida',areaNombre:'Vida personal y sostenibilidad',categorias:['vida-personal','bienestar','familia','sueno','limites'],estado:'Activo permanente',prioridad:'Alta',objetivo:'Sueño, salud, pareja, Matteo, rutinas familiares, entrenamientos, finanzas y límites de carga.',siguiente:'Crear semáforo de sobrecarga que cruce sueño, pendientes y proyectos activos.',sub:['Rutina de sueño','Organización familiar','Tiempo de pareja','Entrenamientos'],dol:['Los proyectos invaden la noche','El cansancio afecta cierres']},
+{id:'tecnologia-automatizacion-experimentacion',nombre:'Tecnología, Automatización y Experimentación',area:'software',areaNombre:'Software, IA y automatización',categorias:['software','ia','herramientas','automatizacion','pwa'],estado:'Activo',prioridad:'Media',objetivo:'GitHub, Vercel, MongoDB, PWA, ChatGPT, agentes, MCP, apps, automatizaciones y hardware personal.',siguiente:'Priorizar la PWA Radar Estratégico como interfaz visual del mapa.',sub:['PWA Radar Estratégico','Automatizaciones GitHub','Prototipos educativos','Herramientas de voz'],dol:['Puede dispersar atención','Curiosidad técnica compite con urgencias']},
+{id:'consultoria-hr-suite',nombre:'Consultoría HR Suite / Nómina',area:'consultoria',areaNombre:'Consultoría técnica',categorias:['consultoria','software','nomina','documentacion'],estado:'Ocasional',prioridad:'Media',objetivo:'Revisión técnica, roadmaps, casos puntuales, validación de archivos, reuniones con Víctor y documentación.',siguiente:'Mantenerlo como frente ocasional con límites estrictos.',sub:['Casos de nómina','Roadmaps','Revisión de integridad'],dol:['Puede consumir tiempo','Respetar 2 horas de reunión y 90 minutos de tarea']},
+{id:'mapa-estrategico-proyectos',nombre:'Mapa Estratégico de Proyectos',area:'software',areaNombre:'Software, IA y automatización',categorias:['sistema-personal','automatizacion','visualizacion','github','pwa','software'],estado:'En construcción',prioridad:'Alta',objetivo:'Centralizar proyectos, avances, pendientes, decisiones y bloqueos en un mapa visual filtrable.',siguiente:'Agregar bitácoras de avances, pendientes, decisiones y bloqueos.',sub:['Mapa Mermaid','Dashboard HTML','Bitácora de avances','PWA futura'],dol:['Depende de registros asistidos','Necesita interfaz más visual que YAML']}
+];
+const cards=document.querySelector('#cards'),buttons=[...document.querySelectorAll('button[data-filter]')],search=document.querySelector('#search');let current='todos';
+function okFilter(p){return current==='todos'||current==='alta'&&p.prioridad==='Alta'||p.categorias.includes(current)||p.area===current}
+function okSearch(p){const q=search.value.trim().toLowerCase();if(!q)return true;return [p.nombre,p.areaNombre,p.estado,p.prioridad,p.objetivo,p.siguiente,...p.sub,...p.dol,...p.categorias].join(' ').toLowerCase().includes(q)}
+function render(){const visible=projects.filter(p=>okFilter(p)&&okSearch(p));cards.innerHTML=visible.map(p=>`<article class="card"><h3>${p.nombre}</h3><div class="meta"><span class="pill">${p.areaNombre}</span><span class="pill ${p.prioridad==='Alta'?'high':'medium'}">Prioridad ${p.prioridad}</span><span class="pill">${p.estado}</span></div><p>${p.objetivo}</p><p><strong>Siguiente acción:</strong> ${p.siguiente}</p><details><summary>Ver subproyectos y dolores</summary><strong>Subproyectos</strong><ul>${p.sub.map(x=>`<li>${x}</li>`).join('')}</ul><strong>Dolores</strong><ul>${p.dol.map(x=>`<li>${x}</li>`).join('')}</ul></details></article>`).join('');document.querySelector('#stat-total').textContent=visible.length;document.querySelector('#stat-high').textContent=visible.filter(p=>p.prioridad==='Alta').length;document.querySelector('#stat-edu').textContent=visible.filter(p=>p.categorias.includes('educacion')).length;document.querySelector('#stat-soft').textContent=visible.filter(p=>p.categorias.some(c=>['software','ia','automatizacion','pwa','agentes'].includes(c))).length}
+buttons.forEach(b=>b.addEventListener('click',()=>{buttons.forEach(x=>x.classList.remove('active'));b.classList.add('active');current=b.dataset.filter;render()}));search.addEventListener('input',render);mermaid.initialize({startOnLoad:true,theme:'default',securityLevel:'loose'});render();
+</script>
 </body>
 </html>
