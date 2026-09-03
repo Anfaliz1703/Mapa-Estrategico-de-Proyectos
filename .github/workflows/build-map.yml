@@ -1,0 +1,43 @@
+name: Generar mapa estratégico
+
+on:
+  push:
+    paths:
+      - 'projects.yml'
+      - 'scripts/generate_mermaid.py'
+      - '.github/workflows/build-map.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-map:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: pip install pyyaml
+
+      - name: Generar Mermaid
+        run: python scripts/generate_mermaid.py
+
+      - name: Confirmar cambios generados
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add docs/mapa.mmd
+            git commit -m "Actualizar mapa Mermaid generado"
+            git push
+          else
+            echo "No hay cambios para confirmar."
+          fi
