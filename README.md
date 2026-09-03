@@ -4,6 +4,33 @@ Radar visual para organizar los proyectos de **Andrés Lizcano Corrales**: docen
 
 > Versión real inicial. Se retiró el nodo ficticio de prueba y se cargó la estructura refinada a partir de la conversación del 2 de septiembre de 2026.
 
+## Vista web con GitHub Pages
+
+La vista principal está preparada en:
+
+```text
+/docs/index.html
+```
+
+Cuando GitHub Pages esté activo, la URL esperada será:
+
+```text
+https://anfaliz1703.github.io/Mapa-Estrategico-de-Proyectos/
+```
+
+Para activarlo:
+
+1. Entrar al repositorio en GitHub.
+2. Ir a **Settings**.
+3. Abrir **Pages**.
+4. En **Build and deployment**, seleccionar **Deploy from a branch**.
+5. En **Branch**, escoger:
+   - Branch: `main`
+   - Folder: `/docs`
+6. Guardar.
+
+Si GitHub no permite publicar desde un repositorio privado con tu plan actual, hay dos salidas limpias: hacer público este repositorio o desplegar la carpeta `docs/` en Vercel. Como este mapa puede contener información personal, conviene pensarlo antes de hacerlo público.
+
 ## Vista conceptual
 
 ```mermaid
@@ -77,6 +104,7 @@ Los juegos estudiantiles de **Martín, Samantha, Emanuel y otros estudiantes** p
 ├── README.md
 ├── projects.yml
 ├── docs/
+│   ├── .nojekyll
 │   ├── index.html
 │   └── mapa.mmd
 ├── scripts/
@@ -93,7 +121,7 @@ Los juegos estudiantiles de **Martín, Samantha, Emanuel y otros estudiantes** p
 1. Editar `projects.yml`.
 2. Ajustar proyectos, categorías, relaciones, prioridades o próximas acciones.
 3. Ejecutar `python scripts/generate_mermaid.py` o dejar que GitHub Actions regenere `docs/mapa.mmd`.
-4. Abrir `docs/index.html` para usar la vista filtrable.
+4. Abrir `docs/index.html` o la URL de GitHub Pages para usar la vista filtrable.
 
 ## Campos principales
 
