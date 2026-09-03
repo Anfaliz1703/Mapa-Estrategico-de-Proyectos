@@ -61,6 +61,7 @@ proyectos:
     relaciones:
       - "guias-interactivas"
       - "mapa-estrategico"
+      - "laboratorio-visual-prueba"
 
   - id: sinapsis
     nombre: "Sinapsis / Tecnoclan"
@@ -96,3 +97,22 @@ proyectos:
     relaciones:
       - "orion-agentes"
       - "epqa"
+      - "laboratorio-visual-prueba"
+
+  - id: laboratorio-visual-prueba
+    nombre: "Laboratorio Visual de Prueba"
+    tipo: "Proyecto ficticio de validación"
+    estado: "Prueba controlada"
+    objetivo: "Validar que un nuevo proyecto pueda aparecer en el mapa, conectarse con otros nodos y mostrar alcance sin modificar proyectos reales."
+    alcance:
+      - "Nodo nuevo en el mapa"
+      - "Relación con ORIÓN"
+      - "Relación con Mapa Estratégico"
+      - "Entregables mínimos de prueba"
+    entregables:
+      - "Nodo Mermaid de validación"
+      - "Actualización del README"
+      - "Confirmación del flujo de edición"
+    relaciones:
+      - "mapa-estrategico"
+      - "orion-agentes"
