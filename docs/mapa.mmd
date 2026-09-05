@@ -16,6 +16,8 @@ flowchart LR
         ORION_AGENTES_DOCENTES["ORIÓN · Agentes Docentes<br/><small>Sistema interno de automatización · Conceptual / en diseño · Prioridad Media</small>"]:::media
         PLATAFORMA_EDUCATIVA_INTEGRAL["Plataforma Educativa Integral<br/><small>Producto software educativo · Idea avanzada · Prioridad Media</small>"]:::media
         TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION["Tecnología, Automatización y Experimentación<br/><small>Laboratorio técnico personal · Activo · Prioridad Media</small>"]:::media
+        AKHUSTICO_STUDIO["AKHUSTICO Studio<br/><small>Aplicación musical personal / grupo · En desarrollo · espera temporal · Prioridad Media</small>"]:::media
+        JARVIS_AIRDUMP["Jarvis AirDump<br/><small>Herramienta personal de productividad · Prototipo funcional · Prioridad Media</small>"]:::media
         MAPA_ESTRATEGICO_PROYECTOS["Mapa Estratégico de Proyectos<br/><small>Radar de mando personal · En construcción · Prioridad Alta</small>"]:::alta
     end
     CENTRO --> AREA_SOFTWARE
@@ -77,13 +79,21 @@ flowchart LR
     TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION --> ORION_AGENTES_DOCENTES
     TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION --> PLATAFORMA_EDUCATIVA_INTEGRAL
     TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION --> EL_PROFE_QUE_APRENDE
+    TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION --> AKHUSTICO_STUDIO
+    TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION --> JARVIS_AIRDUMP
     CONSULTORIA_HR_SUITE --> TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION
     CONSULTORIA_HR_SUITE --> MAPA_ESTRATEGICO_PROYECTOS
+    AKHUSTICO_STUDIO --> TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION
+    AKHUSTICO_STUDIO --> MAPA_ESTRATEGICO_PROYECTOS
+    JARVIS_AIRDUMP --> TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION
+    JARVIS_AIRDUMP --> MAPA_ESTRATEGICO_PROYECTOS
     MAPA_ESTRATEGICO_PROYECTOS --> DOCENCIA_IE_EL_RECREO
     MAPA_ESTRATEGICO_PROYECTOS --> RECURSOS_EDUCATIVOS_IA_TECNOLOGIA
     MAPA_ESTRATEGICO_PROYECTOS --> EL_PROFE_QUE_APRENDE
     MAPA_ESTRATEGICO_PROYECTOS --> SINAPSIS_LIGHTHOUSE
     MAPA_ESTRATEGICO_PROYECTOS --> TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION
+    MAPA_ESTRATEGICO_PROYECTOS --> AKHUSTICO_STUDIO
+    MAPA_ESTRATEGICO_PROYECTOS --> JARVIS_AIRDUMP
 
     %% Próximas acciones
     DOCENCIA_IE_EL_RECREO -.-> DOCENCIA_IE_EL_RECREO_SIG["Siguiente:<br/>Crear tablero por grado, materia, evidencia pendiente y notas mínimas."]:::next
@@ -96,6 +106,8 @@ flowchart LR
     VIDA_FAMILIA_SOSTENIBILIDAD -.-> VIDA_FAMILIA_SOSTENIBILIDAD_SIG["Siguiente:<br/>Crear semáforo de sobrecarga que cruce sueño, pendientes y proyectos activos."]:::next
     TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION -.-> TECNOLOGIA_AUTOMATIZACION_EXPERIMENTACION_SIG["Siguiente:<br/>Priorizar la PWA Radar Estratégico como interfaz visual del mapa."]:::next
     CONSULTORIA_HR_SUITE -.-> CONSULTORIA_HR_SUITE_SIG["Siguiente:<br/>Mantenerlo como frente ocasional con límites estrictos."]:::next
+    AKHUSTICO_STUDIO -.-> AKHUSTICO_STUDIO_SIG["Siguiente:<br/>Preparar el backlog de la siguiente iteración y retomar el módulo de ensayo y línea melódica cuando…"]:::next
+    JARVIS_AIRDUMP -.-> JARVIS_AIRDUMP_SIG["Siguiente:<br/>Implementar transferencia verificada: archivo seleccionado → envío → confirmación de recepción → re…"]:::next
     MAPA_ESTRATEGICO_PROYECTOS -.-> MAPA_ESTRATEGICO_PROYECTOS_SIG["Siguiente:<br/>Agregar bitácoras de avances, pendientes, decisiones y bloqueos."]:::next
 
     classDef center fill:#111827,stroke:#38bdf8,color:#ffffff,stroke-width:2px;
