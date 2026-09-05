@@ -484,6 +484,8 @@ proyectos:
       - "orion-agentes-docentes"
       - "plataforma-educativa-integral"
       - "el-profe-que-aprende"
+      - "akhustico-studio"
+      - "jarvis-airdump"
 
   - id: consultoria-hr-suite
     nombre: "Consultoría HR Suite / Nómina"
@@ -523,6 +525,92 @@ proyectos:
       - "Puede consumir tiempo fuera del bloque acordado"
       - "Debe respetar límite de reunión de 2 horas y tareas de 90 minutos"
     siguiente_accion: "Mantenerlo como frente ocasional con límites estrictos."
+    relaciones:
+      - "tecnologia-automatizacion-experimentacion"
+      - "mapa-estrategico-proyectos"
+
+  - id: akhustico-studio
+    nombre: "AKHUSTICO Studio"
+    area_principal: "software"
+    categoria:
+      - "software"
+      - "musica"
+      - "audio"
+      - "voz"
+      - "vercel"
+    tipo: "Aplicación musical personal / grupo"
+    estado: "En desarrollo · espera temporal"
+    prioridad: "Media"
+    objetivo: "Construir una plataforma integral para AKHUSTICO que permita preparar pistas y voces, ensayar canciones, cantar sobre el repertorio y visualizar la línea melódica de la interpretación."
+    alcance:
+      - "Preparación y construcción de pistas"
+      - "Procesamiento y trabajo con voces"
+      - "Ensayo de repertorio"
+      - "Captura de voz durante la práctica"
+      - "Visualización de línea melódica"
+      - "Despliegue en Vercel"
+    subproyectos:
+      - "Módulo de pistas"
+      - "Módulo de voz"
+      - "Modo ensayo"
+      - "Análisis y visualización melódica"
+    acciones_recurrentes:
+      - "Iterar funcionalidades musicales"
+      - "Probar flujo de ensayo"
+      - "Validar procesamiento de audio y voz"
+      - "Registrar backlog antes de cada sesión de desarrollo"
+    entregables:
+      - "Aplicación web en Vercel"
+      - "Módulo de ensayo"
+      - "Herramientas de pistas y voz"
+      - "Visualizador de línea melódica"
+    dolores:
+      - "Dependencia temporal de créditos de Antigravity para continuar el desarrollo asistido"
+      - "El alcance puede crecer al intentar reunir producción y práctica musical en una sola aplicación"
+    siguiente_accion: "Preparar el backlog de la siguiente iteración y retomar el módulo de ensayo y línea melódica cuando se restablezcan los créditos de Antigravity."
+    relaciones:
+      - "tecnologia-automatizacion-experimentacion"
+      - "mapa-estrategico-proyectos"
+
+  - id: jarvis-airdump
+    nombre: "Jarvis AirDump"
+    area_principal: "software"
+    categoria:
+      - "software"
+      - "pwa"
+      - "iphone"
+      - "wifi"
+      - "transferencia-archivos"
+    tipo: "Herramienta personal de productividad"
+    estado: "Prototipo funcional"
+    prioridad: "Media"
+    objetivo: "Vaciar de forma rápida y práctica fotos y videos del iPhone hacia un computador o SSD mediante Wi-Fi, reduciendo la fricción al liberar almacenamiento."
+    alcance:
+      - "Selección de fotos y videos"
+      - "Transferencia por Wi-Fi"
+      - "Recepción en PC o almacenamiento externo"
+      - "Seguimiento de archivos transferidos"
+      - "Confirmación de transferencia correcta"
+      - "Flujo seguro para eliminar originales transferidos"
+    subproyectos:
+      - "Transferencia rápida de archivos"
+      - "Registro de transferencias exitosas"
+      - "Manejo de archivos grandes"
+      - "Liberación segura de espacio"
+    acciones_recurrentes:
+      - "Probar transferencias reales desde iPhone"
+      - "Medir comportamiento con archivos grandes"
+      - "Verificar integridad antes de marcar un archivo como transferido"
+      - "Mejorar experiencia de selección y limpieza"
+    entregables:
+      - "Aplicación funcional"
+      - "Transferencia iPhone a PC/SSD"
+      - "Historial de archivos transferidos"
+      - "Flujo de eliminación confirmada"
+    dolores:
+      - "Actualmente un archivo grande puede requerir espacio temporal equivalente disponible en el iPhone"
+      - "La herramienta debe evitar cualquier riesgo de borrar archivos que no hayan llegado correctamente al destino"
+    siguiente_accion: "Implementar transferencia verificada: archivo seleccionado → envío → confirmación de recepción → registro como transferido → opción explícita de eliminar el original."
     relaciones:
       - "tecnologia-automatizacion-experimentacion"
       - "mapa-estrategico-proyectos"
@@ -576,3 +664,5 @@ proyectos:
       - "el-profe-que-aprende"
       - "sinapsis-lighthouse"
       - "tecnologia-automatizacion-experimentacion"
+      - "akhustico-studio"
+      - "jarvis-airdump"
